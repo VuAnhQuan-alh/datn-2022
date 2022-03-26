@@ -10,11 +10,15 @@ const DefaultRoute = '/home'
 const Routes = [
   {
     path: '/home',
-    component: lazy(() => import('../../views/Home'))
+    component: lazy(() => import('../../views/HomePage'))
   },
   {
     path: '/second-page',
     component: lazy(() => import('../../views/SecondPage'))
+  },
+  {
+    path: '/third-page',
+    component: lazy(() => import('../../views/ThirdPage'))
   },
   {
     path: '/login',
