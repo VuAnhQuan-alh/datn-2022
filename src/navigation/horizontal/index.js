@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { Mail, Home, Send } from 'react-feather'
+import { Mail, Home, Box } from 'react-feather'
 
 export default [
   {
@@ -9,15 +9,9 @@ export default [
     navLink: '/home'
   },
   {
-    id: 'secondPage',
-    title: 'Second Page',
-    icon: <Mail size={20} />,
-    navLink: '/second-page'
-  },
-  {
     id: 'thirdPage',
-    title: 'Third Page',
-    icon: <Send size={20} />,
-    navLink: '/third-page'
+    title: 'Thử thách',
+    icon: <Box size={20} />,
+    navLink: '/challenges'
   }
 ]
