@@ -1,1 +1,0 @@
-{"version":3,"sources":["views/ThirdPage/index.jsx"],"names":["ThirdPage"],"mappings":"mJAAA,uBAQeA,UANG,WAChB,OACE","file":"static/js/12.9c719598.chunk.js","sourcesContent":["import React from 'react'\n\nconst ThirdPage = () => {\n  return (\n    <div>ThirdPage components</div>\n  )\n}\n\nexport default ThirdPage"],"sourceRoot":""}
