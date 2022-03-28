@@ -4,7 +4,7 @@ import { Mail, Home, Send } from 'react-feather'
 export default [
   {
     id: 'home',
-    title: 'Home',
+    title: 'Trang chủ',
     icon: <Home size={20} />,
     navLink: '/home'
   },

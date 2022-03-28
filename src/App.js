@@ -1,4 +1,5 @@
 // ** Router Import
+import './index.scss'
 import Router from './router/Router'
 
 const App = props => <Router />

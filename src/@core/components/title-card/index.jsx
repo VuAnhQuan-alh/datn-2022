@@ -1,31 +1,32 @@
 import React from "react";
 import { Col, Row, Typography } from "antd";
+import PropTypes from "prop-types";
+import "./index.scss";
 
-const TitleCard = ({ text, places }) => {
+const CustomTitle = ({ text, places, justify }) => {
   return (
-    <Row style={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}>
-      <Col
-        span={4}
-        style={{
-          width: 30,
-          height: 30,
-          borderRadius: "50%",
-          background: "#AF8FA6",
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          fontWeight: 'bold',
-          color: 'white',
-          marginRight: 16
-        }}
-      >
-        {places}
-      </Col>
-      <Col span={20}>
-        <Typography.Title style={{ margin: 0 }} level={4}>{text}</Typography.Title>
-      </Col>
-    </Row>
+    <>
+      <Row justify={justify}>
+        <Col className="custom-title">{places}</Col>
+        <Col>
+          <Typography.Title level={4} style={{ margin: 0, padding: 0 }}>
+            {text}
+          </Typography.Title>
+        </Col>
+      </Row>
+    </>
   );
 };
 
-export default TitleCard;
+CustomTitle.defaultProps = {
+  text: "Hạng F",
+  places: "F",
+  justify: "start",
+};
+CustomTitle.prototype = {
+  text: PropTypes.string,
+  places: PropTypes.string,
+  justify: PropTypes.string,
+};
+
+export default CustomTitle;
