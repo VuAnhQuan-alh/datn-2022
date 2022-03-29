@@ -30,9 +30,9 @@ const IconChallenge = ({ level, size }) => {
       case "E":
         return "#92C485";
       case "F":
-        return "#22556D";
+        return "#997D90";
       default:
-        return "#22556D";
+        return "#997D90";
     }
   };
   const sizeOfText = (size) => {

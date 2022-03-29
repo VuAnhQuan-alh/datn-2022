@@ -50,7 +50,9 @@ const Home = () => {
   return (
     <>
       <Row>
-        <Typography.Title level={3}>Tiến độ của bạn</Typography.Title>
+        <Typography.Title level={3} style={{ color: "#575d63" }}>
+          Tiến độ của bạn
+        </Typography.Title>
       </Row>
       <Row gutter={16}>
         <Col span={8}>
@@ -71,15 +73,13 @@ const Home = () => {
         </Col>
       </Row>
       <Row style={{ marginTop: 28 }}>
-        <Typography.Title level={3}>Khám phá thử thách</Typography.Title>
+        <Typography.Title level={3} style={{ color: "#575d63" }}>
+          Khám phá thử thách
+        </Typography.Title>
       </Row>
       <Row gutter={16}>
         <Col span={12}>
-          <CustomCard
-            title="Thăng hạng"
-            ranks={lec}
-            textBtn="Tiếp tục"
-          />
+          <CustomCard title="Thăng hạng" ranks={lec} textBtn="Tiếp tục" />
         </Col>
         <Col span={12}>
           <CustomCard

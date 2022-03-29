@@ -9,7 +9,7 @@ const CustomTitle = ({ text, places, justify }) => {
       <Row justify={justify}>
         <Col className="custom-title">{places}</Col>
         <Col>
-          <Typography.Title level={4} style={{ margin: 0, padding: 0 }}>
+          <Typography.Title level={4} style={{ margin: 0, padding: 0, color: '#575d63' }}>
             {text}
           </Typography.Title>
         </Col>
