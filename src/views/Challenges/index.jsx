@@ -1,6 +1,9 @@
 import { Col, Pagination, Row, Typography } from "antd";
 import React from "react";
-import { CustomIconChallenge } from "../../@core/components";
+import {
+  CustomCardChallenge,
+  CustomIconChallenge,
+} from "../../@core/components";
 import BG_IMAGE from "@src/assets/images/pages/challange-filter-bgr.png";
 import "./index.scss";
 
@@ -10,7 +13,14 @@ const challengePage = () => {
     <>
       <Col style={{ backgroundImage: `url(${BG_IMAGE})`, padding: "35px 0px" }}>
         <Row justify="center">
-          <Typography.Title level={1} style={{ color: "#fff", marginTop: -18, textTransform: 'uppercase' }}>
+          <Typography.Title
+            level={1}
+            style={{
+              color: "#fff",
+              marginTop: -18,
+              textTransform: "uppercase",
+            }}
+          >
             Thứ hạng của thử thách
           </Typography.Title>
         </Row>
@@ -21,6 +31,9 @@ const challengePage = () => {
             </Col>
           ))}
         </Row>
+      </Col>
+      <Col style={{ maxWidth: 890, width: "100%", margin: "26px auto" }}>
+        <CustomCardChallenge />
       </Col>
       <Row gutter={16} align="middle" style={{ marginTop: 10 }}>
         <Col style={{ color: "#7367f0", fontWeight: "bold" }}>

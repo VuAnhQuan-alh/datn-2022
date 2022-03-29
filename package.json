@@ -117,5 +117,8 @@
     "not dead",
     "not op_mini all"
   ],
-  "homepage": ""
+  "homepage": "",
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  }
 }
