@@ -17,6 +17,10 @@ const Routes = [
     component: lazy(() => import('../../views/Challenges'))
   },
   {
+    path: '/rank-board',
+    component: lazy(() => import('../../views/RankBoard')),
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/Login')),
     layout: 'BlankLayout',
