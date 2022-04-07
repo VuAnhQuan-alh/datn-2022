@@ -1,31 +1,55 @@
-import { Col, Divider, Menu, Row, Typography } from 'antd'
-import React, { useState } from 'react'
-import { Award, Bookmark, Box, Check, Code, FileText, HelpCircle, MessageCircle, MessageSquare, Share2, Star, Sun, User } from 'react-feather'
-import { CustomIconChallenge } from '../../../../@core/components'
-import './index.scss'
+import { Col, Divider, Menu, Row, Typography } from "antd";
+import React, { useState } from "react";
+import {
+  Award,
+  Bookmark,
+  Box,
+  Check,
+  Code,
+  FileText,
+  HelpCircle,
+  MessageCircle,
+  MessageSquare,
+  Share2,
+  Star,
+  Sun,
+  User,
+} from "react-feather";
+import { CustomIconChallenge } from "../../../../@core/components";
+import "./index.scss";
 
 const contentSubs = {
-  'sub-1': <>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, temporibus!</>,
-  'sub-2': <>Lorem, ipsum.</>,
-  'sub-3': <>Lorem ipsum dolor sit amet consectetur adipisicing elit.</>,
-  'sub-4': <>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non perferendis tempore vero.</>,
-  'sub-5': <>Lorem, ipsum dolor.</>,
-  'sub-6': <>Lorem ipsum dolor sit amet consectetur.</>,
-  'sub-7': <>Lorem</>,
-  'sub-8': <>Lorem ipsum dolor sit amet.</>,
-}
+  "sub-1": (
+    <>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda,
+      temporibus!
+    </>
+  ),
+  "sub-2": <>Lorem, ipsum.</>,
+  "sub-3": <>Lorem ipsum dolor sit amet consectetur adipisicing elit.</>,
+  "sub-4": (
+    <>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non perferendis
+      tempore vero.
+    </>
+  ),
+  "sub-5": <>Lorem, ipsum dolor.</>,
+  "sub-6": <>Lorem ipsum dolor sit amet consectetur.</>,
+  "sub-7": <>Lorem</>,
+  "sub-8": <>Lorem ipsum dolor sit amet.</>,
+};
 
 const TabListCase = () => {
-  const [subKey, setSubKey] = useState('sub-1')
+  const [subKey, setSubKey] = useState("sub-1");
   return (
     <Row gutter={8}>
       <Col span={5}>
         <Menu
-          defaultSelectedKeys={['sub-1']}
+          defaultSelectedKeys={["sub-1"]}
           mode="inline"
           inlineCollapsed={true}
           onSelect={({ key }) => {
-            setSubKey(key)
+            setSubKey(key);
           }}
         >
           <Menu.Item key="sub-1" icon={<FileText size={18} />}>
@@ -55,9 +79,13 @@ const TabListCase = () => {
         </Menu>
       </Col>
       <Col span={19}>
-        <Row>
-          <CustomIconChallenge level="F" size="small" />
-          <Typography.Title level={5}>Staff Feedback</Typography.Title>
+        <Row gutter={10} align="middle" className="custom-header-tab">
+          <Col>
+            <CustomIconChallenge level="F" size="small" />
+          </Col>
+          <Col>
+            <Typography.Title level={5}>Staff Feedback</Typography.Title>
+          </Col>
         </Row>
         <Row gutter={8} align="middle">
           <Col>
@@ -76,11 +104,11 @@ const TabListCase = () => {
             <Bookmark size={14} /> 2
           </Col>
         </Row>
-        <Divider style={{ margin: '6px 0px 10px' }} />
+        <Divider style={{ margin: "6px 0px 10px" }} />
         {contentSubs[subKey]}
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default TabListCase
+export default TabListCase;

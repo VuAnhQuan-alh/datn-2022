@@ -7,6 +7,8 @@ import navigation from '@src/navigation/horizontal'
 // ** Horizontal Menu Components
 import HorizontalNavMenuItems from './HorizontalNavMenuItems'
 
+
+
 const HorizontalMenu = ({ currentActiveItem, routerProps }) => {
   // ** States
   const [activeItem, setActiveItem] = useState(null)

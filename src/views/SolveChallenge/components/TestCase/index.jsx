@@ -31,7 +31,7 @@ const TestCase = ({ result }) => {
   ]
   const ContentList = {
     'tab-1': <Typography.Text>Test cases pro</Typography.Text>,
-    'tab-2': <Typography.Text>{result}</Typography.Text>
+    'tab-2': <Typography.Text>Result: {result}</Typography.Text>
   }
   return (
     <Card

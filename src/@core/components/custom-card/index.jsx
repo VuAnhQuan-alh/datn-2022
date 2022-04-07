@@ -64,7 +64,7 @@ const CustomCard = ({
                 </Row>
               </Col>
               <Col flex="auto" style={{ textAlign: "end" }}>
-                <CustomButton text={textBtn} />
+                <CustomButton text={textBtn} href="/challenge/142a/detail" />
               </Col>
             </Row>
             {ranks.length > 1 && idx !== ranks.length - 1 && <Divider />}

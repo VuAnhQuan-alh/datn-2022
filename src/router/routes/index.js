@@ -4,7 +4,7 @@ import { lazy } from 'react'
 const TemplateTitle = 'Top Code | Algorithm website'
 
 // ** Default Route
-const DefaultRoute = '/home'
+const DefaultRoute = '/login'
 
 // ** Merge Routes
 const Routes = [
@@ -15,6 +15,14 @@ const Routes = [
   {
     path: '/challenges',
     component: lazy(() => import('../../views/Challenges'))
+  },
+  {
+    path: '/challenge/:id/solve',
+    component: lazy(() => import('../../views/SolveChallenge'))
+  },
+  {
+    path: '/challenge/:id/detail',
+    component: lazy(() => import('../../views/DetailChallenge'))
   },
   {
     path: '/rank-board',
