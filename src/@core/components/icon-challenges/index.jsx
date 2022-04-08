@@ -5,12 +5,16 @@ import "./index.scss";
 const IconChallenge = ({ level, size }) => {
   const sizeOfIcon = (size) => {
     switch (size) {
+      case "little":
+        return "22px";
       case "small":
         return "30px";
       case "default":
         return "42px";
       case "large":
         return "54px";
+      case "big":
+        return "120px";
       default:
         return "42px";
     }
@@ -37,12 +41,16 @@ const IconChallenge = ({ level, size }) => {
   };
   const sizeOfText = (size) => {
     switch (size) {
+      case "little":
+        return "13.5px";
       case "small":
         return "18px";
       case "default":
         return "24px";
       case "large":
         return "32px";
+      case "big":
+        return "86px";
       default:
         return "24px";
     }

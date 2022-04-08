@@ -1,0 +1,27 @@
+.custom-card-detail-challenge {
+  .ant-card-body {
+    padding: 10px 24px;
+    text-align: center;
+  }
+}
+.custom-card-header-challenge {
+  .ant-row {
+    margin-bottom: 24px;
+    .ant-typography {
+      margin: 0px;
+    }
+  }
+  .ant-row:nth-child(1) {
+    align-items: baseline;
+    .ant-col:nth-child(2) {
+      display: flex;
+      justify-content: start;
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+  .ant-btn {
+    margin-top: 24px;
+  }
+}
