@@ -76,39 +76,46 @@ const Router = () => {
    */
   const FinalRoute = (props) => {
     const route = props.route;
-    let action, resource;
+    console.log(route)
+    // let action, resource;
+    if (!isUserLoggedIn() && route?.meta?.authRoute) {
+      console.log("hello login");
+      return <Redirect to="/login" />
+    }
+
+    return <route.component {...props} />;
 
     // ** Assign vars based on route meta
-    if (route.meta) {
-      action = route.meta.action ? route.meta.action : null;
-      resource = route.meta.resource ? route.meta.resource : null;
-    }
+    // if (route?.meta) {
+    //   action = route.meta?.action ? route.meta.action : null;
+    //   resource = route.meta?.resource ? route.meta.resource : null;
+    // }
 
-    if (
-      (!isUserLoggedIn() && route.meta === undefined) ||
-      (!isUserLoggedIn() &&
-        route.meta &&
-        !route.meta.authRoute &&
-        !route.meta.publicRoute)
-    ) {
-      /**
-       ** If user is not Logged in & route meta is undefined
-       ** OR
-       ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
-       ** Then redirect user to login
-       */
+    // if (
+    //   (!isUserLoggedIn() && route.meta === undefined) ||
+    //   (!isUserLoggedIn() &&
+    //     route?.meta &&
+    //     !route?.meta?.authRoute &&
+    //     !route?.meta?.publicRoute)
+    // ) {
+    //   /**
+    //    ** If user is not Logged in & route meta is undefined
+    //    ** OR
+    //    ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
+    //    ** Then redirect user to login
+    //    */
 
-      return <Redirect to="/login" />;
-    } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
-      // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      return <Redirect to="/" />;
-    } else if (isUserLoggedIn() && !ability.can(action || "read", resource)) {
-      // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
-      return <Redirect to="/misc/not-authorized" />;
-    } else {
-      // ** If none of the above render component
-      return <route.component {...props} />;
-    }
+    //   return <Redirect to="/login" />;
+    // } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
+    //   // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
+    //   return <Redirect to="/" />;
+    // } else if (isUserLoggedIn() && !ability.can(action || "read", resource)) {
+    //   // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
+    //   return <Redirect to="/misc/not-authorized" />;
+    // } else {
+    //   // ** If none of the above render component
+    //   return <route.component {...props} />;
+    // }
   };
 
   // ** Return Route to Render
@@ -170,23 +177,23 @@ const Router = () => {
                             /*eslint-disable */
                             {...(route.appLayout
                               ? {
-                                  appLayout: route.appLayout,
-                                }
+                                appLayout: route.appLayout,
+                              }
                               : {})}
                             {...(route.meta
                               ? {
-                                  routeMeta: route.meta,
-                                }
+                                routeMeta: route.meta,
+                              }
                               : {})}
                             {...(route.className
                               ? {
-                                  wrapperClass: route.className,
-                                }
+                                wrapperClass: route.className,
+                              }
                               : {})}
-                            /*eslint-enable */
+                          /*eslint-enable */
                           >
-                            <route.component {...props} />
-                            {/* <FinalRoute route={route} {...props} /> */}
+                            {/* <route.component {...props} /> */}
+                            <FinalRoute route={route} {...props} />
                           </LayoutWrapper>
                         </Suspense>
                       );

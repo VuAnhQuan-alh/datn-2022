@@ -10,30 +10,59 @@ const DefaultRoute = '/login'
 const Routes = [
   {
     path: '/home',
-    component: lazy(() => import('../../views/HomePage'))
+    component: lazy(() => import('../../views/HomePage')),
+    meta: {
+      authRoute: true
+    }
+  },
+  {
+    path: '/admin-site',
+    component: lazy(() => import('../../views/AdminSite')),
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/challenges',
-    component: lazy(() => import('../../views/Challenges'))
+    component: lazy(() => import('../../views/Challenges')),
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/challenge/:id/solve',
-    component: lazy(() => import('../../views/SolveChallenge'))
+    component: lazy(() => import('../../views/SolveChallenge')),
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/challenge/:id/detail',
-    component: lazy(() => import('../../views/DetailChallenge'))
+    component: lazy(() => import('../../views/DetailChallenge')),
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/rank-board',
     component: lazy(() => import('../../views/RankBoard')),
+    meta: {
+      authRoute: true
+    }
+  },
+  {
+    path: '/my-challenges',
+    component: lazy(() => import('../../views/Users')),
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/login',
-    component: lazy(() => import('../../views/Login')),
+    component: lazy(() => import('../../views/WelcomeWeb')),
     layout: 'BlankLayout',
     meta: {
-      authRoute: true
+      authRoute: false
     }
   },
   {

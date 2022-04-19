@@ -1,0 +1,11 @@
+.custom-form-login {
+  .ant-row.ant-form-item {
+    width: 100%;
+    input:focus {
+      border-color: #7468f0;
+    }
+    input:hover {
+      border-color: #7468F0;
+    }
+  }
+}

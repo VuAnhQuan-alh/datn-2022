@@ -1,8 +1,10 @@
 import Editor from "@monaco-editor/react";
-import { Button, Card, Col, Row } from "antd";
+import { Button, Card, Col, Row, Select } from "antd";
 import React, { useRef, useState } from "react";
 import { Star } from "react-feather";
 import { TabListCase, TestCase } from "./components";
+
+const { Option } = Select;
 
 const SolveChallenge = () => {
   const editorRef = useRef(null)
@@ -11,15 +13,11 @@ const SolveChallenge = () => {
     editorRef.current = editor
   }
   const handleCode = () => {
-    const str = editorRef.current.getValue().split('main(data)')[1]
-    const funcString = str.substring(3, str.length - 3).trim()
-    const data = 'vu anh quan'
-    // eslint-disable-next-line no-new-func
-    let func = new Function('data', funcString)
-    const result = func(data)
-    setEqual(result)
+    const str = editorRef.current.getValue();
+    // const result = btoa(str);
   }
   const main = `\nfunction main(data) { \n    /* coding here */\n    return data;\n};\nmain(data);`
+  const handleChangeLanguages = (value) => { }
 
   return (
     <Card>
@@ -39,6 +37,15 @@ const SolveChallenge = () => {
               <Row align="middle" style={{ marginTop: 4 }}>
                 <Star size={16} />&nbsp; 0 / 30
               </Row>
+            </Col>
+            <Col>
+              <Select defaultValue="c" style={{ width: "120px" }} onChange={handleChangeLanguages}>
+                <Option value="c">C</Option>
+                <Option value="php">PHP</Option>
+                <Option value="java">Java</Option>
+                <Option value="javascript">JavaScript</Option>
+                <Option value="python3">Python 3</Option>
+              </Select>
             </Col>
           </Row>
           <Row>

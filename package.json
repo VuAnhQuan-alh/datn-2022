@@ -5,6 +5,8 @@
   "dependencies": {
     "@casl/ability": "5.2.2",
     "@casl/react": "2.1.1",
+    "@ckeditor/ckeditor5-build-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-react": "^5.0.0",
     "@fullcalendar/core": "5.7.2",
     "@fullcalendar/daygrid": "5.7.2",
     "@fullcalendar/interaction": "5.7.2",

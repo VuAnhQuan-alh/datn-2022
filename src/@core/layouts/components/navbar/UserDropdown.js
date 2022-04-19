@@ -1,30 +1,33 @@
 // ** React Imports
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-
 // ** Custom Components
 import Avatar from '@components/avatar'
-
-// ** Utils
-import { isUserLoggedIn } from '@utils'
-
-// ** Store & Actions
-import { useDispatch } from 'react-redux'
-import { handleLogout } from '@store/actions/auth'
-
-// ** Third Party Components
-import { UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap'
-import { User, Mail, CheckSquare, MessageSquare, Settings, CreditCard, HelpCircle, Power } from 'react-feather'
-
 // ** Default Avatar Image
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
+import { handleLogout } from '@store/actions/auth'
+// ** Utils
+import { isUserLoggedIn } from '@utils'
+import { useEffect, useState } from 'react'
+import { Box, CheckSquare, MessageSquare, Power, User } from 'react-feather'
+// ** Store & Actions
+import { useDispatch } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
+// ** Third Party Components
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap'
 
 const UserDropdown = () => {
+  const isAdmin = JSON.parse(window.localStorage.getItem("top-code"))?.isAdmin || false;
   // ** Store Vars
   const dispatch = useDispatch()
 
   // ** State
   const [userData, setUserData] = useState(null)
+
+  // ** Logout out
+  const history = useHistory();
+  const handleLogout = () => {
+    window.localStorage.clear();
+    history.push("/login");
+  }
 
   //** ComponentDidMount
   useEffect(() => {
@@ -45,14 +48,16 @@ const UserDropdown = () => {
         </div>
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
-      <DropdownMenu right>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <User size={14} className='mr-75' />
-          <span className='align-middle'>Profile</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <Mail size={14} className='mr-75' />
-          <span className='align-middle'>Inbox</span>
+      <DropdownMenu right style={{ width: 220 }}>
+        {isAdmin && (
+          <DropdownItem tag={Link} to='/admin-site'>
+            <User size={14} className='mr-75' />
+            <span className='align-middle'>Quản lý thử thách</span>
+          </DropdownItem>
+        )}
+        <DropdownItem tag={Link} to='/my-challenges'>
+          <Box size={14} className='mr-75' />
+          <span className='align-middle'>Thử thách của tôi</span>
         </DropdownItem>
         <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
           <CheckSquare size={14} className='mr-75' />
@@ -62,7 +67,7 @@ const UserDropdown = () => {
           <MessageSquare size={14} className='mr-75' />
           <span className='align-middle'>Chats</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='/login' onClick={() => dispatch(handleLogout())}>
+        <DropdownItem tag={Link} to='/login' onClick={handleLogout}>
           <Power size={14} className='mr-75' />
           <span className='align-middle'>Logout</span>
         </DropdownItem>

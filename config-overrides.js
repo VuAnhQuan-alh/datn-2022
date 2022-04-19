@@ -8,6 +8,7 @@ module.exports = function override(config, env) {
   })
 
   config = rewireAliases.aliasesOptions({
+    '@api': path.resolve(__dirname, 'src/api'),
     '@src': path.resolve(__dirname, 'src'),
     '@assets': path.resolve(__dirname, 'src/@core/assets'),
     '@components': path.resolve(__dirname, 'src/@core/components'),
@@ -16,7 +17,7 @@ module.exports = function override(config, env) {
     '@styles': path.resolve(__dirname, 'src/@core/scss'),
     '@configs': path.resolve(__dirname, 'src/configs'),
     '@utils': path.resolve(__dirname, 'src/utility/Utils'),
-    '@hooks': path.resolve(__dirname, 'src/utility/hooks')
+    '@hooks': path.resolve(__dirname, 'src/utility/hooks'),
   })(config, env)
 
   config = new SassRuleRewire()

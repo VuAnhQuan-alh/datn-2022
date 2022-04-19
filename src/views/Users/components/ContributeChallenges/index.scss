@@ -1,0 +1,17 @@
+.custom-contribute-challenges {
+  .ant-form {
+    width: 100%;
+    .ant-form-item {
+      width: 100%;
+      .ant-btn svg {
+        margin: -2px 4px 0px 0px;
+      }
+    }
+    .ck.ck-editor__main .ck-content {
+      min-height: 360px;
+    }
+  }
+  #pointer {
+    width: 75%;
+  }
+}

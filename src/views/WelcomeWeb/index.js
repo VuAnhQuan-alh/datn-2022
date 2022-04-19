@@ -1,11 +1,12 @@
 import { useSkin } from '@hooks/useSkin'
-import { Link, Redirect } from 'react-router-dom'
-import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
-import InputPasswordToggle from '@components/input-password-toggle'
-import { Row, Col, CardTitle, CardText, Form, FormGroup, Label, Input, CustomInput, Button } from 'reactstrap'
 import '@styles/base/pages/page-auth.scss'
+import { Tabs } from 'antd'
+import { Link } from 'react-router-dom'
+import { CardText, CardTitle, Col, Row } from 'reactstrap'
+import { Login } from './components'
+import "./index.scss"
 
-const Login = () => {
+const WelcomeWebsite = () => {
   const [skin, setSkin] = useSkin()
 
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
@@ -76,54 +77,14 @@ const Login = () => {
               Welcome to Top code! 👋
             </CardTitle>
             <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
-            <Form className='auth-login-form mt-2' onSubmit={e => e.preventDefault()}>
-              <FormGroup>
-                <Label className='form-label' for='login-email'>
-                  Email
-                </Label>
-                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
-              </FormGroup>
-              <FormGroup>
-                <div className='d-flex justify-content-between'>
-                  <Label className='form-label' for='login-password'>
-                    Password
-                  </Label>
-                  <Link to='/'>
-                    <small>Forgot Password?</small>
-                  </Link>
-                </div>
-                <InputPasswordToggle className='input-group-merge' id='login-password' />
-              </FormGroup>
-              <FormGroup>
-                <CustomInput type='checkbox' className='custom-control-Primary' id='remember-me' label='Remember Me' />
-              </FormGroup>
-              <Button.Ripple tag={Link} to='/home' color='primary' block>
-                Sign in
-              </Button.Ripple>
-            </Form>
-            <p className='text-center mt-2'>
-              <span className='mr-25'>New on our platform?</span>
-              <Link to='/'>
-                <span>Create an account</span>
-              </Link>
-            </p>
-            <div className='divider my-2'>
-              <div className='divider-text'>or</div>
-            </div>
-            <div className='auth-footer-btn d-flex justify-content-center'>
-              <Button.Ripple color='facebook'>
-                <Facebook size={14} />
-              </Button.Ripple>
-              <Button.Ripple color='twitter'>
-                <Twitter size={14} />
-              </Button.Ripple>
-              <Button.Ripple color='google'>
-                <Mail size={14} />
-              </Button.Ripple>
-              <Button.Ripple className='mr-0' color='github'>
-                <GitHub size={14} />
-              </Button.Ripple>
-            </div>
+            <Tabs defaultActiveKey='login'>
+              <Tabs.TabPane tab="Login" key="login">
+                <Login />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Register" key="register">
+                Register component
+              </Tabs.TabPane>
+            </Tabs>
           </Col>
         </Col>
       </Row>
@@ -131,4 +92,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default WelcomeWebsite
