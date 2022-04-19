@@ -16,6 +16,13 @@ const Routes = [
     }
   },
   {
+    path: '/profiles',
+    component: lazy(() => import('../../views/Profiles')),
+    meta: {
+      authRoute: true
+    }
+  },
+  {
     path: '/admin-site',
     component: lazy(() => import('../../views/AdminSite')),
     meta: {

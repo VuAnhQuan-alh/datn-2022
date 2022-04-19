@@ -49,20 +49,20 @@ const UserDropdown = () => {
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
       <DropdownMenu right style={{ width: 220 }}>
-        {isAdmin && (
-          <DropdownItem tag={Link} to='/admin-site'>
-            <User size={14} className='mr-75' />
-            <span className='align-middle'>Quản lý thử thách</span>
-          </DropdownItem>
-        )}
+        <DropdownItem tag={Link} to='/admin-site'>
+          <CheckSquare size={14} className='mr-75' />
+          <span className='align-middle'>Quản lý tài khoản</span>
+        </DropdownItem>
         <DropdownItem tag={Link} to='/my-challenges'>
           <Box size={14} className='mr-75' />
           <span className='align-middle'>Thử thách của tôi</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <CheckSquare size={14} className='mr-75' />
-          <span className='align-middle'>Tasks</span>
-        </DropdownItem>
+        {isAdmin && (
+          <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
+            <User size={14} className='mr-75' />
+            <span className='align-middle'>Quản lý thử thách</span>
+          </DropdownItem>
+        )}
         <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
           <MessageSquare size={14} className='mr-75' />
           <span className='align-middle'>Chats</span>
