@@ -65,6 +65,20 @@ const Routes = [
     }
   },
   {
+    path: '/contribute-challenges',
+    component: lazy(() => import('../../views/Users')),
+    meta: {
+      authRoute: true
+    }
+  },
+  {
+    path: '/contribute-challenges/:id/update',
+    component: lazy(() => import('../../views/RankBoard')),
+    meta: {
+      authRoute: true
+    }
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/WelcomeWeb')),
     layout: 'BlankLayout',

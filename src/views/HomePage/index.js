@@ -1,5 +1,7 @@
 import { Col, Progress, Row, Typography } from "antd";
+import { useState, useEffect } from "react";
 import { CustomCard, CustomTitle } from "../../@core/components";
+import ChallengesAPI from "../../api/challengesApi";
 
 const Home = () => {
   let ranker = [
@@ -47,6 +49,34 @@ const Home = () => {
     },
   ];
 
+  const [listChallenges, setListChallenges] = useState([])
+  const getListChallenge = async () => {
+    await ChallengesAPI.getChallenges()
+      .then(response => {
+        if (response.status === 200) {
+          const result = response.data.data
+            .map((item, idx) => ({
+              key: idx,
+              ...item,
+              text: item.title,
+              point: item.score,
+              pass: 25,
+              cup: 1,
+              comment: 1,
+              save: 2,
+              answer: 1,
+            }))
+          setListChallenges(result)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+  useEffect(() => {
+    getListChallenge()
+  }, [])
+
   return (
     <>
       <Row>
@@ -72,6 +102,8 @@ const Home = () => {
           />
         </Col>
       </Row>
+
+      {/* list card */}
       <Row style={{ marginTop: 28 }}>
         <Typography.Title level={3} style={{ color: "#575d63" }}>
           Khám phá thử thách
@@ -84,7 +116,7 @@ const Home = () => {
         <Col span={12}>
           <CustomCard
             title="Thử thách mới nhất"
-            ranks={lec}
+            ranks={listChallenges}
             textBtn="Tiếp tục"
           />
         </Col>

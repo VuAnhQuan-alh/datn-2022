@@ -1,4 +1,11 @@
 .custom-contribute-challenges {
+  .custom-test-case .ant-row {
+    width: 100%;
+    .ant-space,
+    .ant-space-item {
+      width: 90%;
+    }
+  }
   .ant-form {
     width: 100%;
     .ant-form-item {

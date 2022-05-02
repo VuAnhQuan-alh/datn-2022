@@ -76,10 +76,10 @@ const Router = () => {
    */
   const FinalRoute = (props) => {
     const route = props.route;
-    console.log(route)
+    // console.log(route)
     // let action, resource;
     if (!isUserLoggedIn() && route?.meta?.authRoute) {
-      console.log("hello login");
+      // console.log("hello login");
       return <Redirect to="/login" />
     }
 

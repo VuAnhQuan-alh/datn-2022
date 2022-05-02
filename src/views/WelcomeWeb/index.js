@@ -3,7 +3,7 @@ import '@styles/base/pages/page-auth.scss'
 import { Tabs } from 'antd'
 import { Link } from 'react-router-dom'
 import { CardText, CardTitle, Col, Row } from 'reactstrap'
-import { Login } from './components'
+import { Login, Register } from './components'
 import "./index.scss"
 
 const WelcomeWebsite = () => {
@@ -82,7 +82,7 @@ const WelcomeWebsite = () => {
                 <Login />
               </Tabs.TabPane>
               <Tabs.TabPane tab="Register" key="register">
-                Register component
+                <Register />
               </Tabs.TabPane>
             </Tabs>
           </Col>

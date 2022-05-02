@@ -1,11 +1,13 @@
 import { Card, Col, List, Row, Typography } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Star } from 'react-feather'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { CustomButton, CustomIconChallenge } from '../../@core/components'
+import ChallengesAPI from '../../api/challengesApi'
 import "./index.scss"
 
 const DetailChallenge = () => {
+  const [detailChallenge, setDetailChallenge] = useState({})
   const data = [
     { title: 'Hạng S' },
     { title: 'Hạng A' },
@@ -15,6 +17,22 @@ const DetailChallenge = () => {
     { title: 'Hạng E' },
     { title: 'Hạng F' },
   ]
+  const { pathname } = useLocation()
+  const id = pathname.split('/')[2]
+  const getDetailChallenge = async () => {
+    await ChallengesAPI.getDetailChallenge(id)
+      .then(response => {
+        if (response.status === 200) {
+          setDetailChallenge(response.data.data)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+  useEffect(() => {
+    getDetailChallenge()
+  }, [])
 
   return (
     <Row gutter={24}>
@@ -38,23 +56,19 @@ const DetailChallenge = () => {
         <Card className='custom-card-header-challenge'>
           <Row gutter={24}>
             <Col>
-              <Typography.Title level="3">Lazy Eater</Typography.Title>
+              <Typography.Title level="3">{detailChallenge.title}</Typography.Title>
             </Col>
             <Col>
-              <Star size={24} />&nbsp;<Typography.Title level={4}>100</Typography.Title>
+              <Star size={24} />&nbsp;<Typography.Title level={4}>{detailChallenge.score}</Typography.Title>
             </Col>
           </Row>
           <Row>
             <Col span={6}>
               <CustomIconChallenge level="E" size="big" />
-              <CustomButton href="/challenge/76hys/solve" />
+              <CustomButton href={`/challenge/${id}/solve`} />
             </Col>
             <Col span={18}>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi, excepturi nulla. Inventore quia facilis esse. Magnam, debitis quos eos maxime architecto porro, ratione, recusandae quo rerum vero expedita. Aspernatur, magnam?
-              Perspiciatis facere cupiditate ipsum magnam neque natus fugiat, quod nobis eaque enim aut, quam animi tempore tenetur atque modi in vitae, qui praesentium ex molestias ipsa laborum dolorum? Quis, consequatur!
-              Eveniet, eligendi autem facere ea ducimus nemo sequi officiis rem debitis dolores, exercitationem explicabo illum reprehenderit harum. Tempore assumenda porro velit vitae similique quas, eaque quasi facere, esse nostrum quod?
-              Facilis atque, ab sunt est, cumque dolore consequatur pariatur fugit maxime tempore quos quod. Ut odit nostrum quod? Dolorem deleniti accusantium autem perspiciatis ratione, reprehenderit suscipit quae modi quasi nisi!
-              Ea dolore culpa nemo optio nulla. Quia molestiae sapiente nisi blanditiis consequatur ullam odio quam illum repudiandae voluptates maxime, similique harum distinctio architecto provident nulla rerum magnam impedit. Sit, omnis!
+              <div dangerouslySetInnerHTML={{ __html: detailChallenge.description }}></div>
             </Col>
           </Row>
         </Card>

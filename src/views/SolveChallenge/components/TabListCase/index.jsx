@@ -18,29 +18,27 @@ import {
 import { CustomIconChallenge } from "../../../../@core/components";
 import "./index.scss";
 
-const contentSubs = {
-  "sub-1": (
-    <>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda,
-      temporibus!
-    </>
-  ),
-  "sub-2": <>Lorem, ipsum.</>,
-  "sub-3": <>Lorem ipsum dolor sit amet consectetur adipisicing elit.</>,
-  "sub-4": (
-    <>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non perferendis
-      tempore vero.
-    </>
-  ),
-  "sub-5": <>Lorem, ipsum dolor.</>,
-  "sub-6": <>Lorem ipsum dolor sit amet consectetur.</>,
-  "sub-7": <>Lorem</>,
-  "sub-8": <>Lorem ipsum dolor sit amet.</>,
-};
-
-const TabListCase = () => {
+const TabListCase = ({ detail }) => {
   const [subKey, setSubKey] = useState("sub-1");
+  const contentSubs = {
+    "sub-1": (
+      <div dangerouslySetInnerHTML={{ __html: detail?.description }}></div>
+    ),
+    "sub-2": <>Lorem, ipsum.</>,
+    "sub-3": <>Lorem ipsum dolor sit amet consectetur adipisicing elit.</>,
+    "sub-4": (
+      <>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non perferendis
+        tempore vero.
+      </>
+    ),
+    "sub-5": <>Lorem, ipsum dolor.</>,
+    "sub-6": <>Lorem ipsum dolor sit amet consectetur.</>,
+    "sub-7": <>Lorem</>,
+    "sub-8": <>Lorem ipsum dolor sit amet.</>,
+  };
+
+
   return (
     <Row gutter={8}>
       <Col span={5}>
@@ -84,12 +82,12 @@ const TabListCase = () => {
             <CustomIconChallenge level="F" size="small" />
           </Col>
           <Col>
-            <Typography.Title level={5}>Staff Feedback</Typography.Title>
+            <Typography.Title level={5}>{detail?.title}</Typography.Title>
           </Col>
         </Row>
         <Row gutter={8} align="middle">
           <Col>
-            <Star size={14} /> 30
+            <Star size={14} /> {detail?.score}
           </Col>
           <Col>
             <Check size={14} /> 24%

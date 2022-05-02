@@ -1,11 +1,24 @@
 .custom-form-login {
+  min-height: 376px;
+  margin: auto 0px;
   .ant-row.ant-form-item {
     width: 100%;
     input:focus {
       border-color: #7468f0;
     }
     input:hover {
-      border-color: #7468F0;
+      border-color: #7468f0;
+    }
+  }
+}
+.custom-form-regis {
+  .ant-row.ant-form-item {
+    width: 100%;
+    input:focus {
+      border-color: #7468f0;
+    }
+    input:hover {
+      border-color: #7468f0;
     }
   }
 }

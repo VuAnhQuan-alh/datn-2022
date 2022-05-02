@@ -2,16 +2,29 @@ import { axiosClient } from "./axiosClient";
 
 const UserAPI = {
   Register(data = {}) {
-    const url = "/user/register";
-    return axiosClient.post(url, data);
+    try {
+      const url = "/user/register";
+      return axiosClient.post(url, data);
+    } catch (error) {
+      throw new Error(error)
+    }
   },
   Login(data = {}) {
-    const url = "/user/login";
-    return axiosClient.post(url, data);
+    try {
+
+      const url = "/user/login";
+      return axiosClient.post(url, data);
+    } catch (error) {
+      throw new Error(error)
+    }
   },
   getChallengeUser() {
-    const url = "/user/challenges";
-    return axiosClient.get(url);
+    try {
+      const url = "/user/challenges";
+      return axiosClient.get(url);
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 }
 

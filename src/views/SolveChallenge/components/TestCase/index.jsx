@@ -30,7 +30,7 @@ const TestCase = ({ result }) => {
     }
   ]
   const ContentList = {
-    'tab-1': <Typography.Text>Test cases pro</Typography.Text>,
+    'tab-1': <Typography.Text>{result ? "Nhấn chạy thử để xem kết quả." : "Bài kiểm tra không thành công"}</Typography.Text>,
     'tab-2': <Typography.Text>Result: {result}</Typography.Text>
   }
   return (
