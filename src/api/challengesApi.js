@@ -1,14 +1,40 @@
 import { axiosClient } from "./axiosClient";
 
 const ChallengesAPI = {
-  getChallenges() {
+  adminGetChallenges() {
     try {
-      const url = "/challenges";
-      return axiosClient.get(url);
+      const url = "/admin/challenges"
+      return axiosClient.get(url)
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error)
     }
   },
+  acceptChallenges(id = "", data = {}) {
+    try {
+      const url = `/admin/accept-challenge/${id}`
+      return axiosClient.post(url, data)
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+  userGetChallenges() {
+    try {
+      const url = "/user/challenges";
+      return axiosClient.get(url);
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+  getChallengesInDashboard() {
+    try {
+      const url = '/dashboard'
+      return axiosClient.get(url)
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+
+  // remove this api
   getChallengeUser() {
     try {
       const url = "/user/challenges";
@@ -17,6 +43,7 @@ const ChallengesAPI = {
       throw new Error(error)
     }
   },
+
   getDetailChallenge(id = "") {
     try {
       const url = `/user/detail-challenge/${id}`;
@@ -33,13 +60,7 @@ const ChallengesAPI = {
       throw new Error(error)
     }
   },
-  visibleChallenge(id = "") {
-    try {
-      // const url
-    } catch (error) {
-      throw new Error(error)
-    }
-  },
+
   updateChallenge(id = "", data = {}) {
     try {
       const url = `/user/update-challenge/${id}`

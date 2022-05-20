@@ -7,35 +7,39 @@ import {
 import BG_IMAGE from "@src/assets/images/pages/challange-filter-bgr.png";
 import "./index.scss";
 import ChallengesAPI from "../../api/challengesApi";
+import { useDispatch, useSelector } from "react-redux";
 
 const ChallengePage = () => {
+  const dispatch = useDispatch();
+  const { data, status } = useSelector((store) => store.list_challenges);
+
+  useEffect(() => {}, [dispatch]);
+
   const levels = ["S", "A", "B", "C", "D", "E", "F"];
-  const [dataChallenge, setDataChallenge] = useState([])
+  const [dataChallenge, setDataChallenge] = useState([]);
 
   const getChallenges = async () => {
-    await ChallengesAPI.getChallenges()
-      .then(response => {
-        console.log(response)
-        if (response.status === 200) {
-          const result = response.data.data
-            .map((item, idx) => ({
-              key: idx,
-              ...item,
-              text: item.title,
-              point: item.score,
-              pass: 25,
-              cup: 1,
-              comment: 1,
-              save: 2,
-              answer: 1,
-            }))
-          setDataChallenge(result)
-        }
-      })
-  }
+    await ChallengesAPI.getChallenges().then((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        const result = response.data.data.map((item, idx) => ({
+          key: idx,
+          ...item,
+          text: item.title,
+          point: item.score,
+          pass: 25,
+          cup: 1,
+          comment: 1,
+          save: 2,
+          answer: 1,
+        }));
+        setDataChallenge(result);
+      }
+    });
+  };
   useEffect(() => {
-    getChallenges()
-  }, [])
+    getChallenges();
+  }, []);
 
   return (
     <>

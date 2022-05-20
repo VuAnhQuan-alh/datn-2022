@@ -7,10 +7,10 @@ import useJwt from '@src/@core/auth/jwt/useJwt'
  */
 // eslint-disable-next-line arrow-body-style
 export const isUserLoggedIn = () => {
-  return localStorage.getItem('top-code') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName)
+  return localStorage.getItem('top-code') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName) // userData
 }
 
-export const getUserData = () => JSON.parse(localStorage.getItem('top-code'))
+export const getUserData = () => JSON.parse(localStorage.getItem('top-code')) // userData
 
 /**
  * This function is used for demo purpose route navigation

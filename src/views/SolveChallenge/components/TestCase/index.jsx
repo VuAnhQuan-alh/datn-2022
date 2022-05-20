@@ -1,47 +1,71 @@
-import { Col, Card, Row, Typography } from 'antd'
-import React, { useState } from 'react'
-import { Filter, Terminal } from 'react-feather'
+import { Tabs, Row, Col } from 'antd'
+import { isEmpty } from 'lodash'
+import React, { useEffect, useState } from 'react'
+import { AlertTriangle, CheckCircle, Lock } from 'react-feather'
+import { useDispatch, useSelector } from 'react-redux'
+import { userDeleteSolution } from '@store/actions/challenges'
 import './index.scss'
 
-const TestCase = ({ result }) => {
-  const [activeTab, setActiveTab] = useState('tab-1')
-  const TabList = [
-    {
-      key: 'tab-1',
-      tab: <Row justify='center' gutter={6} align='middle'>
-        <Col>
-          <Filter size={16} />
-        </Col>
-        <Col>
-          <Typography>Test Cases</Typography>
-        </Col>
+const { TabPane } = Tabs
+
+const TestCase = ({ data }) => {
+  const dispatch = useDispatch()
+  const { data: dataTest, status } = useSelector(store => store.action_challenge)
+  const [equalTest, setEqualTest] = useState([])
+
+  useEffect(() => {
+    if (status === 'success') setEqualTest(dataTest) && console.log('render')
+  }, [dataTest, status])
+  useEffect(() => {
+    return dispatch(userDeleteSolution())
+  }, [dispatch])
+
+  const test_cases = data.test_case?.map((item, idx) => ({ key: idx, ...item }))
+  const formatEqual = (test) => {
+    return <>
+      <Row>
+        <Col span={8}>Input:</Col>
+        <Col span={16}>{test.input[0].value}</Col>
       </Row>
-    },
-    {
-      key: 'tab-2',
-      tab: <Row gutter={6} justify='center' align='middle'>
-        <Col>
-          <Terminal size={16} />
-        </Col>
-        <Col>
-          <Typography>Đầu ra</Typography>
-        </Col>
+      <Row>
+        <Col span={8}>Actual output:</Col>
+        <Col span={16}>{!isEmpty(equalTest) && equalTest.test_case?.find(item => item.id === test._id)?.output}</Col>
       </Row>
-    }
-  ]
-  const ContentList = {
-    'tab-1': <Typography.Text>{result ? "Nhấn chạy thử để xem kết quả." : "Bài kiểm tra không thành công"}</Typography.Text>,
-    'tab-2': <Typography.Text>Result: {result}</Typography.Text>
+      <Row>
+        <Col span={8}>Expected output:</Col>
+        <Col span={16}>{test.expect}</Col>
+      </Row>
+      <Row>
+        <Col span={8}>Execute time:</Col>
+        <Col span={16}>{!isEmpty(equalTest) && equalTest.test_case?.find(item => item.id === test._id)?.time_run}</Col>
+      </Row>
+      <Row>
+        <Col span={8}>Message:</Col>
+        <Col span={16}>{!isEmpty(equalTest) && equalTest.test_case?.find(item => item.id === test._id)?.status}</Col>
+      </Row>
+    </>
   }
   return (
-    <Card
+    <Tabs
       className='custom-card-test'
-      tabList={TabList}
-      activeTabKey={activeTab}
-      onTabChange={(key) => setActiveTab(key)}
+      tabPosition='left'
+      defaultActiveKey='test-1'
     >
-      {ContentList[activeTab]}
-    </Card>
+      {test_cases && test_cases.map(item =>
+        <TabPane
+          key={`test-${++item.key}`}
+          tab={<Row align='middle'>
+            Test case {++item.key}&nbsp;
+            {item.hidden
+              ? <Lock size={14} />
+              : isEmpty(equalTest) ? '' : equalTest.test_case?.find(test => test.id === item._id)?.pass
+                ? <CheckCircle size={16} color="green" />
+                : <AlertTriangle size={16} color="red" />}
+          </Row>}>
+          {formatEqual(item)}
+        </TabPane>
+      )}
+    </Tabs>
   )
 }
 

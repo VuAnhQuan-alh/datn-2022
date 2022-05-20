@@ -1,7 +1,9 @@
 import { Col, Progress, Row, Typography } from "antd";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CustomCard, CustomTitle } from "../../@core/components";
-import ChallengesAPI from "../../api/challengesApi";
+import { dashboardGetChallenge } from "@store/actions/challenges";
+import { convertLever } from "../../utility/Utils";
 
 const Home = () => {
   let ranker = [
@@ -16,66 +18,20 @@ const Home = () => {
       answer: 1,
     },
   ];
-  let lec = [
-    {
-      places: "F",
-      text: "Staff Feedback",
-      point: 30,
-      pass: 25,
-      cup: 1,
-      comment: 1,
-      save: 2,
-      answer: 1,
-    },
-    {
-      places: "F",
-      text: "Staff Feedback",
-      point: 30,
-      pass: 25,
-      cup: 1,
-      comment: 1,
-      save: 2,
-      answer: 1,
-    },
-    {
-      places: "F",
-      text: "Staff Feedback",
-      point: 30,
-      pass: 25,
-      cup: 1,
-      comment: 1,
-      save: 2,
-      answer: 1,
-    },
-  ];
+  const [dataChallenges, setDataChallenges] = useState([])
+  const dispatch = useDispatch()
+  const { data: listChallenges, status } = useSelector(store => store.list_challenges)
 
-  const [listChallenges, setListChallenges] = useState([])
-  const getListChallenge = async () => {
-    await ChallengesAPI.getChallenges()
-      .then(response => {
-        if (response.status === 200) {
-          const result = response.data.data
-            .map((item, idx) => ({
-              key: idx,
-              ...item,
-              text: item.title,
-              point: item.score,
-              pass: 25,
-              cup: 1,
-              comment: 1,
-              save: 2,
-              answer: 1,
-            }))
-          setListChallenges(result)
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
   useEffect(() => {
-    getListChallenge()
-  }, [])
+    dispatch(dashboardGetChallenge())
+  }, [dispatch])
+  useEffect(() => {
+    if (status === 'success' && listChallenges.length > 0) {
+      const result = listChallenges?.map((item, idx) =>
+        ({ stt: idx + 1, key: idx, ...item, text: item.title, places: convertLever(item.score), point: item.score, cup: 0, comment: 0, save: 0, answer: 0 }))
+      setDataChallenges(result)
+    }
+  }, [status, listChallenges])
 
   return (
     <>
@@ -111,12 +67,16 @@ const Home = () => {
       </Row>
       <Row gutter={16}>
         <Col span={12}>
-          <CustomCard title="Thăng hạng" ranks={lec} textBtn="Tiếp tục" />
+          <CustomCard
+            title="Thăng hạng"
+            ranks={[...dataChallenges].sort((a, b) => b.score - a.score)}
+            textBtn="Tiếp tục"
+          />
         </Col>
         <Col span={12}>
           <CustomCard
             title="Thử thách mới nhất"
-            ranks={listChallenges}
+            ranks={[...dataChallenges].sort((a, b) => b.key - a.key)}
             textBtn="Tiếp tục"
           />
         </Col>

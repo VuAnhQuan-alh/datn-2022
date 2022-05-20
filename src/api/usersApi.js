@@ -18,9 +18,9 @@ const UserAPI = {
       throw new Error(error)
     }
   },
-  getChallengeUser() {
+  getListUser() {
     try {
-      const url = "/user/challenges";
+      const url = "/admin/list-user";
       return axiosClient.get(url);
     } catch (error) {
       throw new Error(error)

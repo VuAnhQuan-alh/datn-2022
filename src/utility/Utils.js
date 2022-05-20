@@ -48,8 +48,8 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
  ** This is completely up to you and how you want to store the token in your frontend application
  *  ? e.g. If you are using cookies to store the application please update this function
  */
-export const isUserLoggedIn = () => localStorage.getItem('top-code')
-export const getUserData = () => JSON.parse(localStorage.getItem('top-code'))
+export const isUserLoggedIn = () => localStorage.getItem('top-code') // userData
+export const getUserData = () => JSON.parse(localStorage.getItem('top-code')) // userData
 
 /**
  ** This function is used for demo purpose route navigation
@@ -77,3 +77,14 @@ export const selectThemeColors = theme => ({
     neutral30: '#ededed' // for input hover border-color
   }
 })
+
+// ** convert level
+export const convertLever = point => {
+  return point <= 100 ? "F"
+    : point <= 200 ? "E"
+      : point <= 300 ? "D"
+        : point <= 400 ? "C"
+          : point <= 500 ? "B"
+            : point <= 600 ? "A"
+              : "S"
+}

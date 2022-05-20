@@ -3,8 +3,11 @@
     width: 100%;
     .ant-space,
     .ant-space-item {
-      width: 90%;
+      width: 100%;
     }
+  }
+  svg {
+    cursor: pointer;
   }
   .ant-form {
     width: 100%;

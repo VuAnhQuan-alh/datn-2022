@@ -16,6 +16,7 @@ import {
   User,
 } from "react-feather";
 import { CustomIconChallenge } from "../../../../@core/components";
+import { convertLever } from "../../../../utility/Utils";
 import "./index.scss";
 
 const TabListCase = ({ detail }) => {
@@ -79,7 +80,7 @@ const TabListCase = ({ detail }) => {
       <Col span={19}>
         <Row gutter={10} align="middle" className="custom-header-tab">
           <Col>
-            <CustomIconChallenge level="F" size="small" />
+            <CustomIconChallenge level={convertLever(detail?.score)} size="small" />
           </Col>
           <Col>
             <Typography.Title level={5}>{detail?.title}</Typography.Title>
@@ -90,16 +91,16 @@ const TabListCase = ({ detail }) => {
             <Star size={14} /> {detail?.score}
           </Col>
           <Col>
-            <Check size={14} /> 24%
+            <Check size={14} /> 0%
           </Col>
           <Col>
-            <Award size={14} /> 1%
+            <Award size={14} /> 0%
           </Col>
           <Col>
-            <MessageSquare size={14} /> 1
+            <MessageSquare size={14} /> 0
           </Col>
           <Col>
-            <Bookmark size={14} /> 2
+            <Bookmark size={14} /> 0
           </Col>
         </Row>
         <Divider style={{ margin: "6px 0px 10px" }} />

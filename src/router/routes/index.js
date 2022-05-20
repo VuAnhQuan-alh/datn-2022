@@ -23,8 +23,15 @@ const Routes = [
     }
   },
   {
-    path: '/admin-site',
-    component: lazy(() => import('../../views/AdminSite')),
+    path: '/admin-system-challenges',
+    component: lazy(() => import('../../views/AdminSYSChallenges')),
+    meta: {
+      authRoute: true
+    }
+  },
+  {
+    path: '/admin-system-users',
+    component: lazy(() => import('../../views/AdminSYSUser')),
     meta: {
       authRoute: true
     }
@@ -60,20 +67,6 @@ const Routes = [
   {
     path: '/my-challenges',
     component: lazy(() => import('../../views/Users')),
-    meta: {
-      authRoute: true
-    }
-  },
-  {
-    path: '/contribute-challenges',
-    component: lazy(() => import('../../views/Users')),
-    meta: {
-      authRoute: true
-    }
-  },
-  {
-    path: '/contribute-challenges/:id/update',
-    component: lazy(() => import('../../views/RankBoard')),
     meta: {
       authRoute: true
     }

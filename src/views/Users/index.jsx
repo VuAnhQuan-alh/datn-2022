@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Tabs, Row, Col } from 'antd'
+import { Card, Col, Row, Tabs } from 'antd';
+import React, { useState } from 'react';
 import { ContributeChallenges, MyChallenges } from './components';
-import { useHistory, useLocation } from 'react-router-dom';
 
 const Users = () => {
-  const { pathname } = useLocation()
-  const url = pathname.split('/')[1]
-  const [activeKey, setActiveKey] = useState(url)
-  const history = useHistory()
-  useEffect(() => {
-    console.log(url)
-    setActiveKey(url)
-  }, [pathname])
+  const [activeKey, setActiveKey] = useState('user-statistic')
 
   return (
     <Col span={24}>
@@ -22,13 +14,7 @@ const Users = () => {
       </Row>
       <Row>
         <Card style={{ width: "100%" }}>
-          <Tabs
-            defaultActiveKey={activeKey}
-            onChange={(value) => {
-              if (value === "my-challenges")
-                history.push(`/${value}`)
-            }}
-          >
+          <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
             <Tabs.TabPane tab="Thống kê" key="user-statistic">
               components my statistic
             </Tabs.TabPane>
@@ -42,7 +28,7 @@ const Users = () => {
               <MyChallenges setActiveKey={setActiveKey} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Đóng góp thử thách" key="contribute-challenges">
-              <ContributeChallenges />
+              <ContributeChallenges setActiveKey={setActiveKey} />
             </Tabs.TabPane>
           </Tabs>
         </Card>

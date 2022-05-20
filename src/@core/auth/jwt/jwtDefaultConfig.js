@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 // ** Auth Endpoints
 export default {
   loginEndpoint: '/jwt/login',

@@ -1,22 +1,26 @@
+import { userGetChallenges } from '@store/actions/challenges'
+import { handleIdChallenge } from '@store/actions/id'
+import { Button, Card, Col, Row, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { Table, Switch, Card, Row, Col, Button } from 'antd'
 import { Edit, Trash2 } from 'react-feather'
-import { ChallengesAPI } from '../../../../api'
-import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+const MyChallenge = ({ setActiveKey }) => {
+  const dispatch = useDispatch()
+  const { data: listChallenges, status } = useSelector(store => store.list_challenges)
 
-const MyChallenge = () => {
   const [dataChallenges, setDataChallenges] = useState([])
-  const history = useHistory()
-  const getDataListChallenge = async () => {
-    await ChallengesAPI.getChallengeUser()
-      .then(response => {
-        if (response.status === 200) {
-          const result = response.data.data.map((item, idx) => ({ key: idx, stt: ++idx, ...item }))
-          setDataChallenges(result)
-        }
-      })
-  }
+
+  useEffect(() => {
+    dispatch(userGetChallenges())
+  }, [dispatch])
+  useEffect(() => {
+    if (status === 'success') {
+      const result = listChallenges.map((item, idx) => ({ key: idx, stt: ++idx, ...item }))
+      setDataChallenges(result)
+    }
+  }, [status, listChallenges])
+
 
   const columns = [
     {
@@ -47,7 +51,10 @@ const MyChallenge = () => {
         <Col>
           <Button
             icon={<Edit size={16} />}
-            onClick={() => { history.push(`/contribute-challenges/${_id}/update`) }}
+            onClick={() => {
+              dispatch(handleIdChallenge(_id, true))
+              setActiveKey('contribute-challenges')
+            }}
           />
         </Col>
         <Col>
@@ -57,9 +64,7 @@ const MyChallenge = () => {
       key: "action"
     }
   ]
-  useEffect(() => {
-    getDataListChallenge()
-  }, [])
+
   return (
     <Card className='custom-card' title="Thử thách của tôi">
       <Table
