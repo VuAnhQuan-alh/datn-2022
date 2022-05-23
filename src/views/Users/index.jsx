@@ -1,29 +1,21 @@
-import { Card, Col, Row, Tabs } from 'antd';
-import React, { useState } from 'react';
-import { ContributeChallenges, MyChallenges } from './components';
+import { Card, Col, Row, Tabs } from "antd";
+import React, { useState } from "react";
+import { ContributeChallenges, MyChallenges } from "./components";
 
 const Users = () => {
-  const [activeKey, setActiveKey] = useState('user-statistic')
+  const [activeKey, setActiveKey] = useState("my-challenges");
 
   return (
     <Col span={24}>
       <Row>
-        <Card style={{ width: "100%" }}>
-          User detail component
-        </Card>
+        <Card style={{ width: "100%" }}>User detail component</Card>
       </Row>
       <Row>
         <Card style={{ width: "100%" }}>
           <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
-            <Tabs.TabPane tab="Thống kê" key="user-statistic">
-              components my statistic
-            </Tabs.TabPane>
-            <Tabs.TabPane tab="Thử thách đã tham gia" key="joined-challenges">
+            {/* <Tabs.TabPane tab="Thử thách đã tham gia" key="joined-challenges">
               components my joined challenges
-            </Tabs.TabPane>
-            <Tabs.TabPane tab="Bài giải" key="user-lessons">
-              components my lessons
-            </Tabs.TabPane>
+            </Tabs.TabPane> */}
             <Tabs.TabPane tab="Thử thách của tôi" key="my-challenges">
               <MyChallenges setActiveKey={setActiveKey} />
             </Tabs.TabPane>
@@ -34,7 +26,7 @@ const Users = () => {
         </Card>
       </Row>
     </Col>
-  )
-}
+  );
+};
 
-export default Users
+export default Users;

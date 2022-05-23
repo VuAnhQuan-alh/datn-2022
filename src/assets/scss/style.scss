@@ -21,6 +21,8 @@ body {
   width: 100%;
   margin: 0 auto;
 }
-// .ant-typography {
-// 	color: #575d63 !important;
-// }
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}

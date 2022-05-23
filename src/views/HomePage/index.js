@@ -18,20 +18,32 @@ const Home = () => {
       answer: 1,
     },
   ];
-  const [dataChallenges, setDataChallenges] = useState([])
-  const dispatch = useDispatch()
-  const { data: listChallenges, status } = useSelector(store => store.list_challenges)
+  const [dataChallenges, setDataChallenges] = useState([]);
+  const dispatch = useDispatch();
+  const { data: listChallenges, status } = useSelector(
+    (store) => store.list_challenges
+  );
 
   useEffect(() => {
-    dispatch(dashboardGetChallenge())
-  }, [dispatch])
+    dispatch(dashboardGetChallenge());
+  }, [dispatch]);
   useEffect(() => {
-    if (status === 'success' && listChallenges.length > 0) {
-      const result = listChallenges?.map((item, idx) =>
-        ({ stt: idx + 1, key: idx, ...item, text: item.title, places: convertLever(item.score), point: item.score, cup: 0, comment: 0, save: 0, answer: 0 }))
-      setDataChallenges(result)
+    if (status === "success" && listChallenges.length > 0) {
+      const result = listChallenges?.map((item, idx) => ({
+        stt: idx + 1,
+        key: idx,
+        ...item,
+        text: item.title,
+        places: convertLever(item.score),
+        point: item.score,
+        cup: 0,
+        comment: 0,
+        save: 0,
+        answer: 0,
+      }));
+      setDataChallenges(result);
     }
-  }, [status, listChallenges])
+  }, [status, listChallenges]);
 
   return (
     <>
@@ -69,14 +81,18 @@ const Home = () => {
         <Col span={12}>
           <CustomCard
             title="Thăng hạng"
-            ranks={[...dataChallenges].sort((a, b) => b.score - a.score)}
+            ranks={[...dataChallenges]
+              .sort((a, b) => b.score - a.score)
+              .slice(0, 5)}
             textBtn="Tiếp tục"
           />
         </Col>
         <Col span={12}>
           <CustomCard
             title="Thử thách mới nhất"
-            ranks={[...dataChallenges].sort((a, b) => b.key - a.key)}
+            ranks={[...dataChallenges]
+              .sort((a, b) => b.key - a.key)
+              .slice(0, 5)}
             textBtn="Tiếp tục"
           />
         </Col>

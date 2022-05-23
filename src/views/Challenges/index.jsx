@@ -1,45 +1,23 @@
+import BG_IMAGE from "@src/assets/images/pages/challange-filter-bgr.png";
 import { Col, Pagination, Row, Typography } from "antd";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CustomCardChallenge,
   CustomIconChallenge,
 } from "../../@core/components";
-import BG_IMAGE from "@src/assets/images/pages/challange-filter-bgr.png";
+import { challengesInHome } from "../../redux/actions/challenges";
 import "./index.scss";
-import ChallengesAPI from "../../api/challengesApi";
-import { useDispatch, useSelector } from "react-redux";
 
 const ChallengePage = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((store) => store.list_challenges);
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    dispatch(challengesInHome());
+  }, [dispatch]);
 
   const levels = ["S", "A", "B", "C", "D", "E", "F"];
-  const [dataChallenge, setDataChallenge] = useState([]);
-
-  const getChallenges = async () => {
-    await ChallengesAPI.getChallenges().then((response) => {
-      console.log(response);
-      if (response.status === 200) {
-        const result = response.data.data.map((item, idx) => ({
-          key: idx,
-          ...item,
-          text: item.title,
-          point: item.score,
-          pass: 25,
-          cup: 1,
-          comment: 1,
-          save: 2,
-          answer: 1,
-        }));
-        setDataChallenge(result);
-      }
-    });
-  };
-  useEffect(() => {
-    getChallenges();
-  }, []);
 
   return (
     <>
@@ -65,18 +43,18 @@ const ChallengePage = () => {
         </Row>
       </Col>
       <Col style={{ maxWidth: 890, width: "100%", margin: "26px auto" }}>
-        <CustomCardChallenge data={dataChallenge} />
+        <CustomCardChallenge data={data} />
       </Col>
       <Row gutter={16} align="middle" style={{ marginTop: 10 }}>
         <Col style={{ color: "#7367f0", fontWeight: "bold" }}>
-          1 - 10 trong {dataChallenge.length} kết quả
+          1 - 10 trong {data.length} kết quả
         </Col>
         <Col>
           <Pagination
             pageSize={10}
             showQuickJumper
             defaultCurrent={1}
-            total={dataChallenge.length}
+            total={data.length}
             className="custom-pagination"
           />
         </Col>
