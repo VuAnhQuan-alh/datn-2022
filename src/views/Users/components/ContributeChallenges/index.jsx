@@ -4,6 +4,7 @@ import {
   Button,
   Checkbox,
   Col,
+  Divider,
   Form,
   Input,
   InputNumber,
@@ -25,7 +26,7 @@ const { Option } = Select;
 
 const ContributeChallenge = ({ setActiveKey }) => {
   const dispatch = useDispatch();
-  const { data, status } = useSelector((store) => store.action_challenge);
+  const { data, status } = useSelector((store) => store.list_challenges);
   const { id, active } = useSelector((store) => store.handle_id);
 
   const [form] = Form.useForm();
@@ -37,6 +38,12 @@ const ContributeChallenge = ({ setActiveKey }) => {
   useEffect(() => {
     if (active && status) {
       dispatch(getAChallenge(id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+  useEffect(() => {
+    if (id && data.length === 1) {
+      console.log(data);
       form.setFieldsValue({
         title: data?.title,
         score: data?.score,
@@ -45,38 +52,51 @@ const ContributeChallenge = ({ setActiveKey }) => {
       setSuggestion(data?.suggestion);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, data]);
 
   const handleSubmit = (e) => {
     form.validateFields().then((data) => {
+      const { test_case, ...argus } = data;
+
+      let params = [];
+      const mapTestCase = test_case.map((item) => {
+        const { list_params, hidden, expect } = item;
+        const input = list_params.map((param) => {
+          const { name, type } = param;
+          const value = JSON.stringify(param.value.split(" "));
+          return { name, type, value };
+        });
+        const param = [...input].map((i, idx) => ({
+          index: idx + 1,
+          name: i.name,
+          type: i.type,
+        }));
+        params = param.reduce((prev, curr) => {
+          if (prev.length === 0) return [curr];
+          if (
+            prev.some(
+              (item) =>
+                item.index === curr.index &&
+                item.name === curr.name &&
+                item.type === curr.type
+            )
+          )
+            return [curr];
+          const result = [...prev].concat(curr);
+          return result;
+        }, []);
+        return { input, expect, hidden: hidden === true ? true : false };
+      });
       const result = {
-        title: data.title,
+        ...argus,
+        test_case: mapTestCase,
+        params,
         description: description,
         description_en: description,
         suggestion: suggestion,
         suggestion_en: suggestion,
-        name_function: data.name_function,
-        output_type: data.output_type,
-        params: data.params.map((item, idx) => ({
-          name: item.name,
-          type: item.type,
-          index: ++idx,
-        })),
-        score: +data.score,
-        rank: Math.ceil(+data.score / 100),
-        run_limit_seconds: +data.run_limit_seconds,
-        run_limit_memory: +data.run_limit_memory,
-        test_case: data.test_case.map((item) => ({
-          input: [
-            {
-              name: item.name,
-              value: JSON.stringify(item.value.split(" ")),
-            },
-          ],
-          expect: item.expect,
-          hidden: item.hidden ? true : false,
-        })),
       };
+
       dispatch(createAChallenge(result))
         .then(() => {
           message.success("Thêm mới thử thách thành công!");
@@ -129,76 +149,6 @@ const ContributeChallenge = ({ setActiveKey }) => {
               }}
             />
           </Form.Item>
-        </Row>
-        <Row></Row>
-        <Row gutter={32}>
-          <Col>
-            <Typography.Title level={5}>Dữ liệu đầu vào</Typography.Title>
-            <Form.List name="params">
-              {(fields, { add, remove }) => (
-                <>
-                  <Row>
-                    <Form.Item>
-                      <CustomButton
-                        onClick={add}
-                        icon={<Plus size={14} />}
-                        text="Thêm mới arguments"
-                      />
-                    </Form.Item>
-                  </Row>
-                  <Row>
-                    {fields.map(({ key, name, ...restField }) => (
-                      <Space key={key}>
-                        <Row gutter={16} align="middle">
-                          <Col span={10}>
-                            <Form.Item
-                              label="Tên biến"
-                              name={[name, "name"]}
-                              {...restField}
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                          <Col span={10}>
-                            <Form.Item
-                              label="Kiểu dự liệu"
-                              name={[name, "type"]}
-                              {...restField}
-                            >
-                              <Select style={{ width: "180px" }}>
-                                <Option value="1">Integer</Option>
-                                <Option value="2">Long</Option>
-                                <Option value="3">Float</Option>
-                                <Option value="4">Char</Option>
-                                <Option value="5">String</Option>
-                                <Option value="6">Boolean</Option>
-                                <Option value="7">Array Of Integers</Option>
-                                <Option value="8">Array Of Longs</Option>
-                                <Option value="9">Array Of Floats</Option>
-                                <Option value="10">Array Of Chars</Option>
-                                <Option value="11">Array Of Strings</Option>
-                                <Option value="12">Array Of Booleans</Option>
-                                <Option value="13">Matrix Of Integers</Option>
-                                <Option value="14">Matrix Of Longs</Option>
-                                <Option value="15">Matrix Of Floats</Option>
-                                <Option value="16">Matrix Of Chars</Option>
-                                <Option value="17">Matrix Of Strings</Option>
-                                <Option value="18">Matrix Of Booleans</Option>
-                              </Select>
-                            </Form.Item>
-                          </Col>
-                          <Col span={4}>
-                            &nbsp;
-                            <Trash2 onClick={() => remove(name)} />
-                          </Col>
-                        </Row>
-                      </Space>
-                    ))}
-                  </Row>
-                </>
-              )}
-            </Form.List>
-          </Col>
         </Row>
 
         <Typography.Title level={5}>Dữ liệu đầu ra</Typography.Title>
@@ -253,13 +203,17 @@ const ContributeChallenge = ({ setActiveKey }) => {
           </Col>
           <Col span={5}>
             <Form.Item label="Điểm" name="score">
-              <InputNumber min={scopePoint.min} max={scopePoint.max} />
+              <InputNumber
+                style={{ width: "100%" }}
+                min={scopePoint.min}
+                max={scopePoint.max}
+              />
             </Form.Item>
           </Col>
         </Row>
 
         <Row gutter={16}>
-          <Col span={9}>
+          <Col span={4}>
             <Form.Item
               label="Giới hạn CPU"
               initialValue={5}
@@ -268,7 +222,7 @@ const ContributeChallenge = ({ setActiveKey }) => {
               <Input addonAfter={<>Giây</>} />
             </Form.Item>
           </Col>
-          <Col span={9}>
+          <Col span={5}>
             <Form.Item
               label="Giới hạn bộ nhớ"
               initialValue={256}
@@ -283,7 +237,6 @@ const ContributeChallenge = ({ setActiveKey }) => {
             {(fields, { add, remove }) => (
               <>
                 <Row>
-                  <Typography.Title level={5}>Test Cases</Typography.Title>
                   <Form.Item>
                     <CustomButton
                       onClick={add}
@@ -293,32 +246,118 @@ const ContributeChallenge = ({ setActiveKey }) => {
                   </Form.Item>
                 </Row>
                 <Row>
-                  {fields.map(({ key, name, ...restField }) => (
-                    <Space key={key}>
-                      <Row gutter={16} align="middle">
+                  {fields.map(({ key, name }) => (
+                    <Col span={24} key={key}>
+                      <Row gutter={16} align="bottom">
                         <Col span={20}>
+                          <Form.List name={[name, "list_params"]}>
+                            {(fields, { add: add_pr, remove: remove_pr }) => (
+                              <>
+                                <Row gutter={16}>
+                                  <Col span={17}></Col>
+                                  <Col>
+                                    <Button onClick={add_pr}>
+                                      Thêm argument
+                                    </Button>
+                                  </Col>
+                                </Row>
+                                {fields.map(
+                                  ({ key: key_pr, name: name_pr }) => (
+                                    <Space key={key_pr}>
+                                      <Row gutter={16} align="middle">
+                                        <Col span={5}>
+                                          <Form.Item
+                                            name={[name_pr, "name"]}
+                                            label="Tên biến"
+                                          >
+                                            <Input placeholder="Điền tên biến" />
+                                          </Form.Item>
+                                        </Col>
+                                        <Col span={6}>
+                                          <Form.Item
+                                            label="Kiểu dự liệu"
+                                            name={[name_pr, "type"]}
+                                          >
+                                            <Select>
+                                              <Option value="1">Integer</Option>
+                                              <Option value="2">Long</Option>
+                                              <Option value="3">Float</Option>
+                                              <Option value="4">Char</Option>
+                                              <Option value="5">String</Option>
+                                              <Option value="6">Boolean</Option>
+                                              <Option value="7">
+                                                Array Of Integers
+                                              </Option>
+                                              <Option value="8">
+                                                Array Of Longs
+                                              </Option>
+                                              <Option value="9">
+                                                Array Of Floats
+                                              </Option>
+                                              <Option value="10">
+                                                Array Of Chars
+                                              </Option>
+                                              <Option value="11">
+                                                Array Of Strings
+                                              </Option>
+                                              <Option value="12">
+                                                Array Of Booleans
+                                              </Option>
+                                              <Option value="13">
+                                                Matrix Of Integers
+                                              </Option>
+                                              <Option value="14">
+                                                Matrix Of Longs
+                                              </Option>
+                                              <Option value="15">
+                                                Matrix Of Floats
+                                              </Option>
+                                              <Option value="16">
+                                                Matrix Of Chars
+                                              </Option>
+                                              <Option value="17">
+                                                Matrix Of Strings
+                                              </Option>
+                                              <Option value="18">
+                                                Matrix Of Booleans
+                                              </Option>
+                                            </Select>
+                                          </Form.Item>
+                                        </Col>
+                                        <Col span={6}>
+                                          <Form.Item
+                                            name={[name_pr, "value"]}
+                                            label="Giá trị"
+                                          >
+                                            <Input placeholder="Điền giá trị truyền vào" />
+                                          </Form.Item>
+                                        </Col>
+                                        <Col style={{ margin: "0 18px" }}>
+                                          <Trash2
+                                            onClick={() => remove_pr(name_pr)}
+                                          />
+                                        </Col>
+                                      </Row>
+                                    </Space>
+                                  )
+                                )}
+                              </>
+                            )}
+                          </Form.List>
+
                           <Row gutter={16}>
-                            <Col span={4}>
+                            <Col span={11}>
                               <Form.Item
-                                {...restField}
-                                name={[name, "name"]}
-                                label="Tên biến"
+                                name={[name, "expect"]}
+                                label="Kết quả mong muốn"
                               >
-                                <Input placeholder="Điền tên biến" />
-                              </Form.Item>
-                            </Col>
-                            <Col span={16}>
-                              <Form.Item
-                                {...restField}
-                                name={[name, "value"]}
-                                label="Giá trị"
-                              >
-                                <Input placeholder="Điền giá trị truyền vào" />
+                                <Input.TextArea rows={1} />
                               </Form.Item>
                             </Col>
                             <Col span={3}>
                               <Form.Item
-                                label="Test case ẩn"
+                                style={{ textAlign: "center" }}
+                                label="Ẩn test case"
                                 name={[name, "hidden"]}
                                 valuePropName="checked"
                               >
@@ -326,22 +365,15 @@ const ContributeChallenge = ({ setActiveKey }) => {
                               </Form.Item>
                             </Col>
                           </Row>
-                          <Row gutter={16}>
-                            <Col span={23}>
-                              <Form.Item
-                                name={[name, "expect"]}
-                                label="Kết quả mong muốn"
-                              >
-                                <Input.TextArea />
-                              </Form.Item>
-                            </Col>
-                          </Row>
                         </Col>
                         <Col span={4}>
-                          <Trash2 onClick={() => remove(name)} />
+                          <Button onClick={() => remove(name)}>
+                            Xoá test case
+                          </Button>
                         </Col>
                       </Row>
-                    </Space>
+                      <Divider />
+                    </Col>
                   ))}
                 </Row>
               </>
@@ -354,8 +386,8 @@ const ContributeChallenge = ({ setActiveKey }) => {
               <CustomButton
                 icon={<Send size={14} />}
                 text="Gửi để duyệt"
-                // onClick={handleSubmit}
-                onClick={() => console.log(form.getFieldValue())}
+                onClick={handleSubmit}
+                // onClick={() => console.log(form.getFieldValue())}
               />
             </Col>
             <Col>

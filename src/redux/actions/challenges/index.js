@@ -4,6 +4,7 @@ import {
   ADMIN_GET_CHALLENGES,
   CREATE_A_CHALLENGE,
   DASHBOARD_GET_CHALLENGES,
+  DELETE_A_CHALLENGE,
   DELETE_SOLUTION,
   GET_A_CHALLENGE,
   HOME_GET_CHALLENGES,
@@ -166,6 +167,20 @@ export const challengesInHome = () => {
       })
       .catch(() => {
         dispatch(errorFormat(HOME_GET_CHALLENGES));
+      });
+  };
+};
+
+export const adminDelAChallenge = (id) => {
+  return (dispatch) => {
+    return ChallengesAPI.adminDeleteChallenge(id)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(successFormat(DELETE_A_CHALLENGE, []));
+        }
+      })
+      .catch(() => {
+        dispatch(errorFormat(DELETE_A_CHALLENGE));
       });
   };
 };

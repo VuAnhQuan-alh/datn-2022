@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ContributeChallenges, MyChallenges } from "./components";
 
 const Users = () => {
-  const [activeKey, setActiveKey] = useState("joined-challenges");
+  const [activeKey, setActiveKey] = useState("my-challenges");
 
   return (
     <Col span={24}>
@@ -13,14 +13,8 @@ const Users = () => {
       <Row>
         <Card style={{ width: "100%" }}>
           <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
-            {/* <Tabs.TabPane tab="Thống kê" key="user-statistic">
-              components my statistic
-            </Tabs.TabPane> */}
-            <Tabs.TabPane tab="Thử thách đã tham gia" key="joined-challenges">
+            {/* <Tabs.TabPane tab="Thử thách đã tham gia" key="joined-challenges">
               components my joined challenges
-            </Tabs.TabPane>
-            {/* <Tabs.TabPane tab="Bài giải" key="user-lessons">
-              components my lessons
             </Tabs.TabPane> */}
             <Tabs.TabPane tab="Thử thách của tôi" key="my-challenges">
               <MyChallenges setActiveKey={setActiveKey} />

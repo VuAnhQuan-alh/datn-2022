@@ -16,6 +16,7 @@ import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   adminAcceptChallenge,
+  adminDelAChallenge,
   adminGetChallenges,
 } from "../../redux/actions/challenges";
 
@@ -24,7 +25,7 @@ const SysChallenges = () => {
   const { data: listChallenges, status } = useSelector(
     (store) => store.list_challenges
   );
-  const { status: statusAccept } = useSelector(
+  const { status: statusAction } = useSelector(
     (store) => store.action_challenge
   );
 
@@ -47,7 +48,7 @@ const SysChallenges = () => {
   const handleAcceptChallenges = (id) => {
     dispatch(adminAcceptChallenge(id))
       .then(() => {
-        if (statusAccept === "success") {
+        if (statusAction === "success") {
           message.success("Cập nhật thử thách thành công.");
           dispatch(adminGetChallenges());
         } else {
@@ -57,7 +58,16 @@ const SysChallenges = () => {
       .catch(() => message.error("Cập nhật thất bại."));
   };
 
-  const handleDeleteChallenge = (id) => {};
+  const handleDeleteChallenge = (id) => {
+    dispatch(adminDelAChallenge(id)).then(() => {
+      if (statusAction === "success") {
+        message.success("Xoá thử thách thành công.");
+        dispatch(adminGetChallenges());
+      } else {
+        message.error("Xoá thử thách thất bại.");
+      }
+    });
+  };
 
   const columns = [
     {
@@ -114,25 +124,25 @@ const SysChallenges = () => {
       align: "center",
       render: (_, record) => (
         <Row gutter={12} justify="center" align="middle">
-          <Col>
+          {/* <Col>
             <Button icon={<Edit size={16} />} />
-          </Col>
+          </Col> */}
           <Col>
             <Popconfirm
-              title="bạn muốn xoá thử thách này?"
-              onConfirm={() => handleAcceptChallenges(record._id)}
-              okText="Yes"
-              cancelText="No"
+              title="Bạn muốn xoá thử thách này?"
+              onConfirm={() => handleDeleteChallenge(record._id)}
+              okText="Đồng ý"
+              cancelText="Huỷ"
             >
               <Button icon={<Trash2 size={16} />} />
             </Popconfirm>
           </Col>
           <Col>
             <Popconfirm
-              title="Cập nhật trạng thái ẩn hiện challenges?"
+              title="Cập nhật trạng thái ẩn hiện của thử thách này?"
               onConfirm={() => handleAcceptChallenges(record._id)}
-              okText="Yes"
-              cancelText="No"
+              okText="Có"
+              cancelText="Huỷ"
             >
               <Switch checked={record.status === 1} />
             </Popconfirm>

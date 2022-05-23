@@ -3,6 +3,7 @@ import {
   ADMIN_GET_CHALLENGES,
   CREATE_A_CHALLENGE,
   DASHBOARD_GET_CHALLENGES,
+  DELETE_A_CHALLENGE,
   DELETE_SOLUTION,
   GET_A_CHALLENGE,
   HOME_GET_CHALLENGES,
@@ -36,6 +37,7 @@ export const action_challenge = (state = initialState, action) => {
     case RUN_SOLUTION:
     case SUBMIT_CHALLENGE:
     case DELETE_SOLUTION:
+    case DELETE_A_CHALLENGE:
       return { ...state, data: action.data, status: action.status };
     default:
       return state;

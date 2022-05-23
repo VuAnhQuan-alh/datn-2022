@@ -77,6 +77,14 @@ const ChallengesAPI = {
       throw new Error(error);
     }
   },
+  adminDeleteChallenge(id) {
+    try {
+      const url = `/admin/delete-challenge/${id}`;
+      return axiosClient.delete(url);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
   runSolution(id = "", data = {}) {
     try {
       const url = `/user/solutions/${id}`;
