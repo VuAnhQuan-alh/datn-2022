@@ -78,10 +78,10 @@ const Router = () => {
     const route = props.route;
     // console.log(route)
     // let action, resource;
-    if (!isUserLoggedIn() && route?.meta?.authRoute) {
-      // console.log("hello login");
-      return <Redirect to="/login" />
-    }
+    // if (!isUserLoggedIn() && route?.meta?.authRoute) {
+    //   // console.log("hello login");
+    //   return <Redirect to="/login" />
+    // }
 
     return <route.component {...props} />;
 
@@ -177,20 +177,20 @@ const Router = () => {
                             /*eslint-disable */
                             {...(route.appLayout
                               ? {
-                                appLayout: route.appLayout,
-                              }
+                                  appLayout: route.appLayout,
+                                }
                               : {})}
                             {...(route.meta
                               ? {
-                                routeMeta: route.meta,
-                              }
+                                  routeMeta: route.meta,
+                                }
                               : {})}
                             {...(route.className
                               ? {
-                                wrapperClass: route.className,
-                              }
+                                  wrapperClass: route.className,
+                                }
                               : {})}
-                          /*eslint-enable */
+                            /*eslint-enable */
                           >
                             {/* <route.component {...props} /> */}
                             <FinalRoute route={route} {...props} />

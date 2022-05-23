@@ -42,15 +42,25 @@ const ContributeChallenge = ({ setActiveKey }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   useEffect(() => {
-    if (id && data.length === 1) {
+    if (id && typeof data === "object") {
       console.log(data);
       form.setFieldsValue({
         title: data?.title,
         score: data?.score,
+        rank: data?.rank,
+        run_limit_seconds: data?.run_limit_seconds,
+        run_limit_memory: data?.run_limit_memory,
+      });
+      setScopePoint({
+        min: data?.rank === 1 ? 1 : data?.rank === 2 ? 51 : 101,
+        max: data?.rank === 1 ? 50 : data?.rank === 2 ? 100 : 150,
       });
       setDescription(data?.description);
       setSuggestion(data?.suggestion);
     }
+    return function () {
+      form.resetFields();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, data]);
 

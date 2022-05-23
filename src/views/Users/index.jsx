@@ -1,14 +1,27 @@
-import { Card, Col, Row, Tabs } from "antd";
-import React, { useState } from "react";
+import { Typography, Card, Col, Row, Tabs, Avatar } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileUser } from "../../redux/actions/user";
 import { ContributeChallenges, MyChallenges } from "./components";
 
 const Users = () => {
   const [activeKey, setActiveKey] = useState("my-challenges");
+  const { data, status } = useSelector((store) => store.user_reducers);
 
   return (
     <Col span={24}>
-      <Row>
-        <Card style={{ width: "100%" }}>User detail component</Card>
+      <Row style={{ marginBottom: 22 }}>
+        <Card style={{ width: "100%" }}>
+          <Row gutter={56}>
+            <Col>
+              <Avatar src="https://joeschmoe.io/api/v1/random" size={128} />
+            </Col>
+            <Col>
+              <Typography.Title level={2}>{data?.name}</Typography.Title>
+              <Typography.Title level={4}>Điểm: {data?.score}</Typography.Title>
+            </Col>
+          </Row>
+        </Card>
       </Row>
       <Row>
         <Card style={{ width: "100%" }}>

@@ -10,6 +10,8 @@ import {
   MessageSquare,
   Star,
 } from "react-feather";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import CustomButton from "../button-cus";
 import CustomTitle from "../title-card";
 import "./index.scss";
@@ -22,12 +24,29 @@ const CustomCard = ({
   textBtn,
   ...config
 }) => {
+  const { data: dataUser, status } = useSelector(
+    (store) => store.user_reducers
+  );
+  const history = useHistory();
+
+  const handleChangeUrl = (url) => {
+    if (dataUser && status === null) {
+      history.push("/login");
+    } else {
+      history.push(url);
+    }
+  };
+
   return (
     <Card className="custom-card" {...config} title={title}>
       {!isEmpty(ranks) &&
         ranks.map((rank, idx) => (
           <Col key={idx}>
-            <CustomTitle places={rank?.places} text={rank?.text} justify="start" />
+            <CustomTitle
+              places={rank?.places}
+              text={rank?.text}
+              justify="start"
+            />
             <Row style={{ alignItems: "center" }} key={idx}>
               <Col>
                 <Row gutter={20} style={{ cursor: "default" }}>
@@ -64,7 +83,12 @@ const CustomCard = ({
                 </Row>
               </Col>
               <Col flex="auto" style={{ textAlign: "end" }}>
-                <CustomButton text={textBtn} href={`/challenge/${rank._id}/detail`} />
+                <CustomButton
+                  text={textBtn}
+                  onClick={() =>
+                    handleChangeUrl(`/challenge/${rank._id}/detail`)
+                  }
+                />
               </Col>
             </Row>
             {ranks.length > 1 && idx !== ranks.length - 1 && <Divider />}
