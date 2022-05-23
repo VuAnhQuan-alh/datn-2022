@@ -1,53 +1,42 @@
 import { Button, Form, Input, message, Row } from "antd";
-import React from "react";
+import { isEmpty } from "lodash";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { UserAPI } from "../../../api";
+import { handleSignIn } from "../../../redux/actions/user";
 import "./index.scss";
 
 const Login = () => {
+  const localData = window.localStorage.getItem("top-code");
+  if (localData) {
+    console.log(JSON.parse(localData));
+  }
+
   const [form] = Form.useForm();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { data, status } = useSelector((store) => store.user_reducers);
   const handleLogin = () => {
     form
       .validateFields()
       .then((data) => {
-        (async (data) => {
-          await UserAPI.Login(data)
-            .then((response) => {
-              if (response.status !== 200) {
-                message.error("Thông tin đăng nhập sai hoặc không tồn tại.");
-                form.resetFields();
-              }
-              if (response.status === 200) {
-                const {
-                  data: {
-                    data: {
-                      infoUser: { _id, is_admin, name, rank, score },
-                      token,
-                    },
-                  },
-                } = response;
-                const result = {
-                  id: _id,
-                  isAdmin: is_admin,
-                  name,
-                  rank,
-                  score,
-                  token,
-                };
-                window.localStorage.setItem("top-code", JSON.stringify(result));
-                history.push("/home");
-              }
-            })
-            .catch(() => {
-              message.error("Thông tin đăng nhập sai hoặc không tồn tại.");
-            });
-        })(data);
+        dispatch(handleSignIn(data));
       })
       .catch((error) => {
         console.log("Error: ", error);
       });
   };
+
+  useEffect(() => {
+    if (status === "error")
+      message.error("Thông tin đăng nhập sai hoặc không tồn tại.");
+    if (status === "success" && !isEmpty(data)) {
+      message.success("Chào mừng bạn đến với Top-code");
+      history.push("/home");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
   return (
     <div className="custom-form-login">
       <Form layout="vertical" form={form}>
@@ -67,12 +56,12 @@ const Login = () => {
         </Row>
         <Row>
           <Form.Item
-            label="Password"
+            label="Mật khẩu"
             name="password"
             rules={[
               {
                 required: true,
-                message: "Vui lòng điền password.",
+                message: "Vui lòng điền mật khẩu.",
               },
             ]}
           >

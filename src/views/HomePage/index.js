@@ -1,23 +1,11 @@
-import { Col, Progress, Row, Typography } from "antd";
-import { useState, useEffect } from "react";
+import { challengesInHome } from "@store/actions/challenges";
+import { Col, Row, Typography } from "antd";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CustomCard, CustomTitle } from "../../@core/components";
-import { dashboardGetChallenge } from "@store/actions/challenges";
-import { convertLever } from "../../utility/Utils";
+import { CustomCard } from "../../@core/components";
+import { convertRank } from "../../utility/Utils";
 
 const Home = () => {
-  let ranker = [
-    {
-      places: "F",
-      text: "Staff Feedback",
-      point: 30,
-      pass: 25,
-      cup: 1,
-      comment: 1,
-      save: 2,
-      answer: 1,
-    },
-  ];
   const [dataChallenges, setDataChallenges] = useState([]);
   const dispatch = useDispatch();
   const { data: listChallenges, status } = useSelector(
@@ -25,7 +13,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(dashboardGetChallenge());
+    dispatch(challengesInHome());
   }, [dispatch]);
   useEffect(() => {
     if (status === "success" && listChallenges.length > 0) {
@@ -34,7 +22,7 @@ const Home = () => {
         key: idx,
         ...item,
         text: item.title,
-        places: convertLever(item.score),
+        places: convertRank(item.rank),
         point: item.score,
         cup: 0,
         comment: 0,
@@ -47,7 +35,7 @@ const Home = () => {
 
   return (
     <>
-      <Row>
+      {/* <Row>
         <Typography.Title level={3} style={{ color: "#575d63" }}>
           Tiến độ của bạn
         </Typography.Title>
@@ -69,7 +57,7 @@ const Home = () => {
             textBtn="Tiếp tục"
           />
         </Col>
-      </Row>
+      </Row> */}
 
       {/* list card */}
       <Row style={{ marginTop: 28 }}>
@@ -84,7 +72,7 @@ const Home = () => {
             ranks={[...dataChallenges]
               .sort((a, b) => b.score - a.score)
               .slice(0, 5)}
-            textBtn="Tiếp tục"
+            textBtn="Giải bài này"
           />
         </Col>
         <Col span={12}>
@@ -93,7 +81,7 @@ const Home = () => {
             ranks={[...dataChallenges]
               .sort((a, b) => b.key - a.key)
               .slice(0, 5)}
-            textBtn="Tiếp tục"
+            textBtn="Giải bài này"
           />
         </Col>
       </Row>

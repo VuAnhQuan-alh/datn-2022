@@ -23,6 +23,19 @@ import "./index.scss";
 
 const sizeIcon = 20;
 
+const Rank = (rank) => {
+  switch (rank) {
+    case 1:
+      return "Dễ";
+    case 2:
+      return "TB";
+    case 3: 
+      return "Khó"
+    default:
+      return "TB";
+  }
+};
+
 const CardChallenge = ({ data }) => {
   return (
     <>
@@ -62,7 +75,7 @@ const CardChallenge = ({ data }) => {
             />
             <Row gutter={26} style={{ cursor: "default" }} align="middle">
               <Col>
-                <CustomIconChallenge level="B" />
+                <CustomIconChallenge level={Rank(item?.rank)} fontSize="little" />
               </Col>
               <Col>
                 <Tooltip placement="bottom" title="Điểm">

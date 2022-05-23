@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
 import {
-  Popconfirm,
+  Avatar,
+  Button,
   Card,
-  Row,
   Col,
   Image,
-  Button,
-  Table,
-  Avatar,
-  Switch,
   message,
+  Popconfirm,
+  Row,
+  Switch,
+  Table,
 } from "antd";
-import { Edit, Trash2 } from "react-feather";
-import "./index.scss";
+import React, { useEffect, useState } from "react";
+import { Trash2 } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import {
   adminAcceptChallenge,
   adminDelAChallenge,
   adminGetChallenges,
 } from "../../redux/actions/challenges";
+import "./index.scss";
 
 const SysChallenges = () => {
   const dispatch = useDispatch();
@@ -124,9 +124,6 @@ const SysChallenges = () => {
       align: "center",
       render: (_, record) => (
         <Row gutter={12} justify="center" align="middle">
-          {/* <Col>
-            <Button icon={<Edit size={16} />} />
-          </Col> */}
           <Col>
             <Popconfirm
               title="Bạn muốn xoá thử thách này?"

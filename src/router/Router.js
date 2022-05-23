@@ -26,6 +26,9 @@ import { DefaultRoute, Routes } from "./routes";
 import BlankLayout from "@layouts/BlankLayout";
 import VerticalLayout from "@src/layouts/VerticalLayout";
 import HorizontalLayout from "@src/layouts/HorizontalLayout";
+import { axiosClient } from "../api/axiosClient";
+import { useDispatch } from "react-redux";
+import { HANDLE_AUTH } from "../redux/constants/user";
 
 const Router = () => {
   // ** Hooks
@@ -76,12 +79,42 @@ const Router = () => {
    */
   const FinalRoute = (props) => {
     const route = props.route;
+    const dataUser = JSON.parse(localStorage.getItem("top-code")) ?? null;
+
+    const dispatch = useDispatch();
+
+    if (!dataUser && route.meta.authRoute) {
+      return <Redirect to="/login" />;
+    }
+
+    if (dataUser && route.meta.authRoute) {
+      try {
+        axiosClient
+          .get("/user/profile")
+          .then((res) => {
+            // console.log(res.data);
+            dispatch({
+              type: HANDLE_AUTH,
+              data: res.data,
+              status: "success",
+            });
+          })
+          .catch((err) => {
+            localStorage.removeItem("top-code");
+            return <Redirect to="/login" />;
+          });
+      } catch (err) {
+        localStorage.removeItem("top-code");
+        return <Redirect to="/login" />;
+      }
+    }
+
     // console.log(route)
     // let action, resource;
-    if (!isUserLoggedIn() && route?.meta?.authRoute) {
-      // console.log("hello login");
-      return <Redirect to="/login" />
-    }
+    // if (!isUserLoggedIn() && route?.meta?.authRoute) {
+    //   // console.log("hello login");
+    //   return <Redirect to="/login" />
+    // }
 
     return <route.component {...props} />;
 
@@ -177,20 +210,20 @@ const Router = () => {
                             /*eslint-disable */
                             {...(route.appLayout
                               ? {
-                                appLayout: route.appLayout,
-                              }
+                                  appLayout: route.appLayout,
+                                }
                               : {})}
                             {...(route.meta
                               ? {
-                                routeMeta: route.meta,
-                              }
+                                  routeMeta: route.meta,
+                                }
                               : {})}
                             {...(route.className
                               ? {
-                                wrapperClass: route.className,
-                              }
+                                  wrapperClass: route.className,
+                                }
                               : {})}
-                          /*eslint-enable */
+                            /*eslint-enable */
                           >
                             {/* <route.component {...props} /> */}
                             <FinalRoute route={route} {...props} />

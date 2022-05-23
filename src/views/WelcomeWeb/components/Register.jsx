@@ -68,12 +68,12 @@ const Register = () => {
         </Row>
         <Row>
           <Form.Item
-            label="Password"
+            label="Mật khẩu"
             name="password"
             rules={[
               {
                 required: true,
-                message: "Vui lòng điền password.",
+                message: "Vui lòng điền mật khẩu.",
               },
             ]}
           >
@@ -82,12 +82,12 @@ const Register = () => {
         </Row>
         <Row>
           <Form.Item
-            label="Confirm password"
+            label="Nhập lại mật khẩu"
             name="re_password"
             rules={[
               {
                 required: true,
-                message: "Vui lòng điền password.",
+                message: "Vui lòng nhập lại mật khẩu.",
               },
             ]}
           >

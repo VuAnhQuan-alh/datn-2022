@@ -17,7 +17,7 @@ const ChallengePage = () => {
     dispatch(challengesInHome());
   }, [dispatch]);
 
-  const levels = ["S", "A", "B", "C", "D", "E", "F"];
+  const levels = ["Dễ", "Trung bình", "Khó"];
 
   return (
     <>
@@ -37,7 +37,7 @@ const ChallengePage = () => {
         <Row justify="center" gutter={16}>
           {levels.map((item, idx) => (
             <Col key={idx}>
-              <CustomIconChallenge level={item} size="large" />
+              <CustomIconChallenge level={item} size="middle" fontSize="little" />
             </Col>
           ))}
         </Row>

@@ -1,33 +1,60 @@
-import { getAChallenge } from '@store/actions/challenges'
-import { Card, Col, List, Row, Typography } from 'antd'
-import React, { useEffect } from 'react'
-import { Star } from 'react-feather'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
-import { CustomButton, CustomIconChallenge } from '../../@core/components'
-import { convertLever } from '../../utility/Utils'
-import "./index.scss"
+import { getAChallenge } from "@store/actions/challenges";
+import { Card, Col, List, Row, Typography } from "antd";
+import React, { useEffect } from "react";
+import { Star } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { CustomButton, CustomIconChallenge } from "../../@core/components";
+import { convertRank } from "../../utility/Utils";
+import "./index.scss";
 
 const DetailChallenge = () => {
-  const dispatch = useDispatch()
-  const { data: detailChallenge } = useSelector(store => store.list_challenges)
+  const dispatch = useDispatch();
+  const { data: detailChallenge } = useSelector(
+    (store) => store.list_challenges
+  );
+  const { data: dataUser, status } = useSelector(
+    (store) => store.user_reducers
+  );
+  const history = useHistory();
+  if (dataUser && status === null) {
+    history.push("/login");
+  }
 
-  const { pathname } = useLocation()
-  const id = pathname.split('/')[2]
+  const { pathname } = useLocation();
+  const id = pathname.split("/")[2];
 
   useEffect(() => {
-    dispatch(getAChallenge(id))
-  }, [dispatch, id])
+    dispatch(getAChallenge(id));
+  }, [dispatch, id]);
+
+  const Rank = (rank) => {
+    switch (rank) {
+      case 1:
+        return "Dễ";
+      case 2:
+        return "TB";
+      case 3: 
+        return "Khó"
+      default:
+        return "TB";
+    }
+  };
 
   const data = [
-    { title: 'Hạng S' },
-    { title: 'Hạng A' },
-    { title: 'Hạng B' },
-    { title: 'Hạng C' },
-    { title: 'Hạng D' },
-    { title: 'Hạng E' },
-    { title: 'Hạng F' },
-  ]
+    {
+      id: 1,
+      title: "Dễ",
+    },
+    {
+      id: 2,
+      title: "Trung bình",
+    },
+    {
+      id: 3,
+      title: "Khó",
+    },
+  ];
 
   return (
     <Row gutter={24}>
@@ -36,11 +63,16 @@ const DetailChallenge = () => {
           <List
             itemLayout="horizontal"
             dataSource={data}
-            renderItem={item => (
+            renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={<CustomIconChallenge level={item.title.slice(-1)} size="little" />}
-                  title={<Link to="/">{item.title}</Link>}
+                  avatar={
+                    <CustomIconChallenge
+                      level={Rank(item.id)}
+                      fontSize="little"
+                    />
+                  }
+                  title={<Link to="/">Xem ngay</Link>}
                 />
               </List.Item>
             )}
@@ -48,28 +80,42 @@ const DetailChallenge = () => {
         </Card>
       </Col>
       <Col span={20}>
-        <Card className='custom-card-header-challenge'>
+        <Card className="custom-card-header-challenge">
           <Row gutter={24}>
             <Col>
-              <Typography.Title level={1}>{detailChallenge?.title}</Typography.Title>
+              <Typography.Title level={1}>
+                {detailChallenge?.title}
+              </Typography.Title>
             </Col>
             <Col>
-              <Star size={24} />&nbsp;<Typography.Title level={4}>{detailChallenge?.score}</Typography.Title>
+              <Star size={24} />
+              &nbsp;
+              <Typography.Title level={4}>
+                {detailChallenge?.score}
+              </Typography.Title>
             </Col>
           </Row>
           <Row>
             <Col span={6}>
-              <CustomIconChallenge level={convertLever(detailChallenge?.score)} size="big" />
+              <CustomIconChallenge
+                level={convertRank(detailChallenge?.rank)}
+                size="small"
+                fontSize="little"
+              />
               <CustomButton href={`/challenge/${id}/solve`} />
             </Col>
             <Col span={18}>
-              <div dangerouslySetInnerHTML={{ __html: detailChallenge?.description }}></div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: detailChallenge?.description,
+                }}
+              ></div>
             </Col>
           </Row>
         </Card>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default DetailChallenge
+export default DetailChallenge;
