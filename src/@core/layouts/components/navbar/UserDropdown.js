@@ -30,17 +30,6 @@ const UserDropdown = () => {
   // ** State
   const [userData, setUserData] = useState(null)
 
-  // ** Logout out
-  const history = useHistory();
-  const handleLogout = async () => {
-      const url = "/user/logout";
-      const response = await axiosClient.get(url);
-      if (response.status === 200) {
-          window.localStorage.removeItem("top-code");
-          window.location.href = /login");
-      }
-  }
-
   //** ComponentDidMount
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
@@ -61,7 +50,7 @@ const UserDropdown = () => {
       >
         <div className="user-nav d-sm-flex d-none">
           <span className="user-name font-weight-bold">
-            {data?.name || "Người dùng"}
+            {data?.name || "Khách"}
           </span>
           <span className="user-status">{data?.is_admin ? "Admin" : ""}</span>
         </div>
@@ -99,14 +88,14 @@ const UserDropdown = () => {
               }}
             >
               <Power size={14} className="mr-75" />
-              <span className="align-middle">Logout</span>
+              <span className="align-middle">Đăng xuất</span>
             </DropdownItem>
           </>
         )}
         {!data?.name && (
           <DropdownItem tag={Link} to="/login">
             <Power size={14} className="mr-75" />
-            <span className="align-middle">Sign In</span>
+            <span className="align-middle">Đăng nhập/Đăng kí</span>
           </DropdownItem>
         )}
       </DropdownMenu>

@@ -82,7 +82,7 @@ const WelcomeWebsite = () => {
               </g>
             </g>
           </svg>
-          <h2 className="brand-text text-primary ml-1">Top code | Algorithm</h2>
+          <h2 className="brand-text text-primary ml-1">Top code | Xin chào</h2>
         </Link>
         <Col className="d-none d-lg-flex align-items-center p-5" lg="8" sm="12">
           <div className="w-100 d-lg-flex align-items-center justify-content-center px-5">
@@ -96,16 +96,16 @@ const WelcomeWebsite = () => {
         >
           <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
             <CardTitle tag="h2" className="font-weight-bold mb-1">
-              Welcome to Top code! 👋
+              Chào mừng bạn đến với Top code! 👋
             </CardTitle>
             <CardText className="mb-2">
-              Please sign-in to your account and start the adventure
+              Đăng nhập để bắt đầu sử dụng các tính năng của Top code.
             </CardText>
             <Tabs defaultActiveKey="login">
-              <Tabs.TabPane tab="Login" key="login">
+              <Tabs.TabPane tab="Đăng nhập" key="login">
                 <Login />
               </Tabs.TabPane>
-              <Tabs.TabPane tab="Register" key="register">
+              <Tabs.TabPane tab="Đăng kí" key="register">
                 <Register />
               </Tabs.TabPane>
             </Tabs>

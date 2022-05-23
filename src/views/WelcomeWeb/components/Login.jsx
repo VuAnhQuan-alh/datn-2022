@@ -56,12 +56,12 @@ const Login = () => {
         </Row>
         <Row>
           <Form.Item
-            label="Password"
+            label="Mật khẩu"
             name="password"
             rules={[
               {
                 required: true,
-                message: "Vui lòng điền password.",
+                message: "Vui lòng điền mật khẩu.",
               },
             ]}
           >
