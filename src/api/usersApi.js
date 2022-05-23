@@ -18,6 +18,16 @@ const UserAPI = {
       throw new Error(error)
     }
   },
+  Logout() {
+    try {
+      console.log("Logout api");
+      const url = "/user/logout";
+      return axiosClient.get(url);
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+
   getListUser() {
     try {
       const url = "/admin/list-user";

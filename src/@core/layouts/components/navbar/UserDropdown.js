@@ -4,7 +4,7 @@ import Avatar from '@components/avatar'
 // ** Default Avatar Image
 // import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 import defaultAvatar from '@src/assets/images/avatars/1-small.png'
-import { handleLogout } from '@store/actions/auth'
+import { axiosClient } from "../../../../api/axiosClient";
 // ** Utils
 import { isUserLoggedIn } from '@utils'
 import { useEffect, useState } from 'react'
@@ -25,10 +25,14 @@ const UserDropdown = () => {
 
   // ** Logout out
   const history = useHistory();
-  // const handleLogout = () => {
-  //   window.localStorage.clear();
-  //   history.push("/login");
-  // }
+  const handleLogout = async () => {
+      const url = "/user/logout";
+      const response = await axiosClient.get(url);
+      if (response.status === 200) {
+          window.localStorage.removeItem("top-code");
+          window.location.href = /login");
+      }
+  }
 
   //** ComponentDidMount
   useEffect(() => {
@@ -74,9 +78,9 @@ const UserDropdown = () => {
           <MessageSquare size={14} className='mr-75' />
           <span className='align-middle'>Chats</span>
         </DropdownItem> */}
-        <DropdownItem tag={Link} to='/login' onClick={handleLogout}>
+        <DropdownItem onClick={handleLogout}>
           <Power size={14} className='mr-75' />
-          <span className='align-middle'>Logout</span>
+          <span className='align-middle'>Đăng xuất</span>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
