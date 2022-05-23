@@ -12,7 +12,7 @@ const Routes = [
     path: "/home",
     component: lazy(() => import("../../views/HomePage")),
     meta: {
-      authRoute: true,
+      authRoute: false,
     },
   },
   // {

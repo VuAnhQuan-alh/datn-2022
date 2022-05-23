@@ -26,6 +26,7 @@ import { DefaultRoute, Routes } from "./routes";
 import BlankLayout from "@layouts/BlankLayout";
 import VerticalLayout from "@src/layouts/VerticalLayout";
 import HorizontalLayout from "@src/layouts/HorizontalLayout";
+import { axiosClient } from "../api/axiosClient";
 
 const Router = () => {
   // ** Hooks
@@ -76,6 +77,28 @@ const Router = () => {
    */
   const FinalRoute = (props) => {
     const route = props.route;
+    const dataUser = JSON.parse(localStorage.getItem("top-code")) ?? null;
+
+    if(!dataUser && route.meta.authRoute) {
+      return <Redirect to="/login" />
+    }
+
+    if(dataUser && route.meta.authRoute){
+      try{
+        axiosClient.get("/user/profile").then(res => {
+          console.log(res.data)
+        }).catch(err => {
+          localStorage.removeItem("top-code");
+          return <Redirect to="/login" />
+        });
+      }catch(err){
+        localStorage.removeItem("top-code");
+        return <Redirect to="/login" />
+      }
+    }
+
+    
+
     // console.log(route)
     // let action, resource;
     // if (!isUserLoggedIn() && route?.meta?.authRoute) {
