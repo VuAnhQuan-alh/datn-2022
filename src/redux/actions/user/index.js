@@ -54,7 +54,6 @@ export const handleSignIn = (data) => {
 export const handleLogout = () => {
   return (dispatch) => {
     return UserAPI.handleLogout().then(() => {
-      window.localStorage.removeItem("top-code");
       dispatch({
         type: HANDLE_LOGOUT,
         data: {},
@@ -70,6 +69,7 @@ export const handleLogout = () => {
         data: {},
         status: null,
       });
+      window.localStorage.removeItem("top-code");
     });
   };
 };

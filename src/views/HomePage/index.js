@@ -3,21 +3,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CustomCard, CustomTitle } from "../../@core/components";
 import { challengesInHome } from "@store/actions/challenges";
-import { convertLever } from "../../utility/Utils";
+import { convertRank } from "../../utility/Utils";
 
 const Home = () => {
-  let ranker = [
-    {
-      places: "F",
-      text: "Staff Feedback",
-      point: 30,
-      pass: 25,
-      cup: 1,
-      comment: 1,
-      save: 2,
-      answer: 1,
-    },
-  ];
+  
   const [dataChallenges, setDataChallenges] = useState([]);
   const dispatch = useDispatch();
   const { data: listChallenges, status } = useSelector(
@@ -34,7 +23,7 @@ const Home = () => {
         key: idx,
         ...item,
         text: item.title,
-        places: convertLever(item.score),
+        places: convertRank(item.rank),
         point: item.score,
         cup: 0,
         comment: 0,
@@ -84,7 +73,7 @@ const Home = () => {
             ranks={[...dataChallenges]
               .sort((a, b) => b.score - a.score)
               .slice(0, 5)}
-            textBtn="Tiếp tục"
+            textBtn="Giải bài này"
           />
         </Col>
         <Col span={12}>
@@ -93,7 +82,7 @@ const Home = () => {
             ranks={[...dataChallenges]
               .sort((a, b) => b.key - a.key)
               .slice(0, 5)}
-            textBtn="Tiếp tục"
+            textBtn="Giải bài này"
           />
         </Col>
       </Row>

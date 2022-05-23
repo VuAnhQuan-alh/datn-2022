@@ -5,7 +5,7 @@ import { Star } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { CustomButton, CustomIconChallenge } from "../../@core/components";
-import { convertLever } from "../../utility/Utils";
+import { convertRank } from "../../utility/Utils";
 import "./index.scss";
 
 const DetailChallenge = () => {
@@ -28,14 +28,32 @@ const DetailChallenge = () => {
     dispatch(getAChallenge(id));
   }, [dispatch, id]);
 
+  const Rank = (rank) => {
+    switch (rank) {
+      case 1:
+        return "Dễ";
+      case 2:
+        return "TB";
+      case 3: 
+        return "Khó"
+      default:
+        return "TB";
+    }
+  };
+
   const data = [
-    { title: "Hạng S" },
-    { title: "Hạng A" },
-    { title: "Hạng B" },
-    { title: "Hạng C" },
-    { title: "Hạng D" },
-    { title: "Hạng E" },
-    { title: "Hạng F" },
+    {
+      id: 1,
+      title: "Dễ",
+    },
+    {
+      id: 2,
+      title: "Trung bình",
+    },
+    {
+      id: 3,
+      title: "Khó",
+    },
   ];
 
   return (
@@ -50,11 +68,11 @@ const DetailChallenge = () => {
                 <List.Item.Meta
                   avatar={
                     <CustomIconChallenge
-                      level={item.title.slice(-1)}
-                      size="little"
+                      level={Rank(item.id)}
+                      fontSize="little"
                     />
                   }
-                  title={<Link to="/">{item.title}</Link>}
+                  title={<Link to="/">Xem ngay</Link>}
                 />
               </List.Item>
             )}
@@ -80,8 +98,9 @@ const DetailChallenge = () => {
           <Row>
             <Col span={6}>
               <CustomIconChallenge
-                level={convertLever(detailChallenge?.score)}
-                size="big"
+                level={convertRank(detailChallenge?.rank)}
+                size="small"
+                fontSize="little"
               />
               <CustomButton href={`/challenge/${id}/solve`} />
             </Col>

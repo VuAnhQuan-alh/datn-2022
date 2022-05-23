@@ -79,12 +79,15 @@ export const selectThemeColors = theme => ({
 })
 
 // ** convert level
-export const convertLever = point => {
-  return point <= 100 ? "F"
-    : point <= 200 ? "E"
-      : point <= 300 ? "D"
-        : point <= 400 ? "C"
-          : point <= 500 ? "B"
-            : point <= 600 ? "A"
-              : "S"
+export const convertRank = rank => {
+  switch (rank) {
+    case 1:
+      return "Dễ";
+    case 2:
+      return "TB";
+    case 3: 
+      return "Khó"
+    default:
+      return "TB";
+  }
 }

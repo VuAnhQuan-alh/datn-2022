@@ -2,45 +2,46 @@ import { Col } from "antd";
 import React from "react";
 import "./index.scss";
 
-const IconChallenge = ({ level, size }) => {
-  const sizeOfIcon = (size) => {
+const IconChallenge = ({ level, size, fontSize }) => {
+  const sizeOfIconWidth = (size) => {
     switch (size) {
-      case "little":
-        return "22px";
       case "small":
-        return "30px";
-      case "default":
-        return "42px";
+        return "50px";
+      case "middle":
+        return "100px";
       case "large":
-        return "54px";
-      case "big":
-        return "120px";
+        return "150px";
       default:
-        return "42px";
+        return "50px";
+    }
+  };
+  const sizeOfIconHeight = (size) => {
+    switch (size) {
+      case "small":
+        return "25px";
+      case "middle":
+        return "50px";
+      case "large":
+        return "75px";
+      default:
+        return "25px";
     }
   };
   const colorOfIcon = (level) => {
     switch (level) {
-      case "S":
-        return "#FFD45B";
-      case "A":
+      case "Dễ":
+        return "rgb(85 177 89)";
+      case "Trung bình":
+      case "TB":
+        return "rgb(240 140 90)";
+      case "Khó":
         return "#F05A65";
-      case "B":
-        return "#A47BB6";
-      case "C":
-        return "#1FB6FF";
-      case "D":
-        return "#82C5E0";
-      case "E":
-        return "#92C485";
-      case "F":
-        return "#997D90";
       default:
-        return "#997D90";
+        return "rgb(85 177 89)";
     }
   };
-  const sizeOfText = (size) => {
-    switch (size) {
+  const sizeOfText = (fontSize) => {
+    switch (fontSize) {
       case "little":
         return "13.5px";
       case "small":
@@ -60,9 +61,9 @@ const IconChallenge = ({ level, size }) => {
       className="custom-icon-challenge"
       style={{
         background: colorOfIcon(level),
-        width: sizeOfIcon(size),
-        height: sizeOfIcon(size),
-        fontSize: sizeOfText(size),
+        width: sizeOfIconWidth(size),
+        height: sizeOfIconHeight(size),
+        fontSize: sizeOfText(fontSize),
       }}
     >
       {level}

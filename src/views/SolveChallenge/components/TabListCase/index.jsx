@@ -16,7 +16,7 @@ import {
   User,
 } from "react-feather";
 import { CustomIconChallenge } from "../../../../@core/components";
-import { convertLever } from "../../../../utility/Utils";
+import { convertRank } from "../../../../utility/Utils";
 import "./index.scss";
 
 const TabListCase = ({ detail }) => {
@@ -54,7 +54,7 @@ const TabListCase = ({ detail }) => {
           <Menu.Item key="sub-1" icon={<FileText size={18} />}>
             Mô tả
           </Menu.Item>
-          <Menu.Item key="sub-2" icon={<MessageCircle size={18} />}>
+          {/* <Menu.Item key="sub-2" icon={<MessageCircle size={18} />}>
             Thảo luận
           </Menu.Item>
           <Menu.Item key="sub-3" icon={<Code size={18} />}>
@@ -62,16 +62,16 @@ const TabListCase = ({ detail }) => {
           </Menu.Item>
           <Menu.Item key="sub-4" icon={<Share2 size={18} />}>
             Bài giải được chia sẻ
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="sub-5" icon={<Sun size={18} />}>
             Giợi ý lời giải
           </Menu.Item>
-          <Menu.Item key="sub-6" icon={<Box size={18} />}>
+          {/* <Menu.Item key="sub-6" icon={<Box size={18} />}>
             Lời giải
           </Menu.Item>
           <Menu.Item key="sub-7" icon={<User size={18} />}>
             Lời giải
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="sub-8" icon={<HelpCircle size={18} />}>
             Trợ giúp
           </Menu.Item>
@@ -80,7 +80,7 @@ const TabListCase = ({ detail }) => {
       <Col span={19}>
         <Row gutter={10} align="middle" className="custom-header-tab">
           <Col>
-            <CustomIconChallenge level={convertLever(detail?.score)} size="small" />
+            <CustomIconChallenge level={convertRank(detail?.rank)} size="small" fontSize="little" />
           </Col>
           <Col>
             <Typography.Title level={5}>{detail?.title}</Typography.Title>
