@@ -63,9 +63,6 @@ const MyChallenge = ({ setActiveKey }) => {
               }}
             />
           </Col>
-          <Col>
-            <Button icon={<Trash2 size={16} />} />
-          </Col>
         </Row>
       ),
       key: "action",

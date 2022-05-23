@@ -2,7 +2,7 @@ import { Col, Progress, Row, Typography } from "antd";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CustomCard, CustomTitle } from "../../@core/components";
-import { dashboardGetChallenge } from "@store/actions/challenges";
+import { challengesInHome } from "@store/actions/challenges";
 import { convertLever } from "../../utility/Utils";
 
 const Home = () => {
@@ -25,7 +25,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(dashboardGetChallenge());
+    dispatch(challengesInHome());
   }, [dispatch]);
   useEffect(() => {
     if (status === "success" && listChallenges.length > 0) {
@@ -47,7 +47,7 @@ const Home = () => {
 
   return (
     <>
-      <Row>
+      {/* <Row>
         <Typography.Title level={3} style={{ color: "#575d63" }}>
           Tiến độ của bạn
         </Typography.Title>
@@ -69,7 +69,7 @@ const Home = () => {
             textBtn="Tiếp tục"
           />
         </Col>
-      </Row>
+      </Row> */}
 
       {/* list card */}
       <Row style={{ marginTop: 28 }}>
