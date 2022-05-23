@@ -5,7 +5,7 @@ const initialState = {
   status: null,
 };
 
-const user_reducers = (state = initialState, action) => {
+export const user_reducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_PROFILE:
     case HANDLE_AUTH:
@@ -20,4 +20,11 @@ const user_reducers = (state = initialState, action) => {
   }
 };
 
-export default user_reducers;
+export const rank_board = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_RANK":
+      return { ...state, data: action.data, status: action.status };
+    default:
+      return state;
+  }
+};

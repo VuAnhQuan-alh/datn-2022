@@ -73,3 +73,18 @@ export const handleLogout = () => {
     });
   };
 };
+
+export const getRankBoard = () => {
+  return (dispatch) => {
+    return UserAPI.getRankBoard().then((response) => {
+      if (response.status === 200) {
+        const result = response.data.data;
+        dispatch({
+          type: "GET_RANK",
+          data: result,
+          status: "success",
+        });
+      }
+    });
+  };
+};

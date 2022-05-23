@@ -101,6 +101,13 @@ const ChallengesAPI = {
       throw new Error(error);
     }
   },
+  getChallengeJoin() {
+    try {
+      return axiosClient.get("/user/challenge-join");
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
 
 export default ChallengesAPI;

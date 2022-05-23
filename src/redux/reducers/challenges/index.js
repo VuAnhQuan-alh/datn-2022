@@ -6,6 +6,7 @@ import {
   DELETE_A_CHALLENGE,
   DELETE_SOLUTION,
   GET_A_CHALLENGE,
+  GET_CHALLENGES_JOIN,
   HOME_GET_CHALLENGES,
   RUN_SOLUTION,
   SUBMIT_CHALLENGE,
@@ -38,6 +39,15 @@ export const action_challenge = (state = initialState, action) => {
     case SUBMIT_CHALLENGE:
     case DELETE_SOLUTION:
     case DELETE_A_CHALLENGE:
+      return { ...state, data: action.data, status: action.status };
+    default:
+      return state;
+  }
+};
+
+export const challenges_joined = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_CHALLENGES_JOIN:
       return { ...state, data: action.data, status: action.status };
     default:
       return state;

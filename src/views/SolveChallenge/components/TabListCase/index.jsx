@@ -25,20 +25,21 @@ const TabListCase = ({ detail }) => {
     "sub-1": (
       <div dangerouslySetInnerHTML={{ __html: detail?.description }}></div>
     ),
-    "sub-2": <>Lorem, ipsum.</>,
-    "sub-3": <>Lorem ipsum dolor sit amet consectetur adipisicing elit.</>,
-    "sub-4": (
-      <>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non perferendis
-        tempore vero.
-      </>
+    // "sub-2": <>Lorem, ipsum.</>,
+    // "sub-3": <>Lorem ipsum dolor sit amet consectetur adipisicing elit.</>,
+    // "sub-4": (
+    //   <>
+    //     Lorem ipsum dolor sit amet consectetur adipisicing elit. Non perferendis
+    //     tempore vero.
+    //   </>
+    // ),
+    "sub-5": (
+      <div dangerouslySetInnerHTML={{ __html: detail?.suggestion }}></div>
     ),
-    "sub-5": <>Lorem, ipsum dolor.</>,
     "sub-6": <>Lorem ipsum dolor sit amet consectetur.</>,
     "sub-7": <>Lorem</>,
     "sub-8": <>Lorem ipsum dolor sit amet.</>,
   };
-
 
   return (
     <Row gutter={8}>
@@ -80,7 +81,11 @@ const TabListCase = ({ detail }) => {
       <Col span={19}>
         <Row gutter={10} align="middle" className="custom-header-tab">
           <Col>
-            <CustomIconChallenge level={convertRank(detail?.rank)} size="small" fontSize="little" />
+            <CustomIconChallenge
+              level={convertRank(detail?.rank)}
+              size="small"
+              fontSize="little"
+            />
           </Col>
           <Col>
             <Typography.Title level={5}>{detail?.title}</Typography.Title>

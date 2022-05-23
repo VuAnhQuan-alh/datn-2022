@@ -1,8 +1,22 @@
-import { Card, Table } from "antd";
-import React from "react";
+import { Avatar, Card, Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getRankBoard } from "../../redux/actions/user";
 import "./index.scss";
 
 const columns = [
+  {
+    title: "",
+    dataIndex: "",
+    key: "avatar",
+    align: "center",
+    width: 120,
+    render: (_, record) => (
+      <>
+        <Avatar size={48} src={`https://joeschmoe.io/api/v1/${record.rank}`} />
+      </>
+    ),
+  },
   {
     title: "Người chơi",
     dataIndex: "name",
@@ -11,7 +25,7 @@ const columns = [
   },
   {
     title: "Hạng",
-    dataIndex: "",
+    dataIndex: "rank",
     key: "rank",
     align: "center",
   },
@@ -24,9 +38,20 @@ const columns = [
 ];
 
 const RankBoard = () => {
+  const dispatch = useDispatch();
+  const { data } = useSelector((store) => store.rank_board);
+  const [dataRank, setDataRank] = useState([]);
+
+  useEffect(() => {
+    dispatch(getRankBoard());
+  }, [dispatch]);
+  useEffect(() => {
+    setDataRank(data);
+  }, [data]);
+
   return (
     <Card className="custom-card" title="Xếp hạng người chơi">
-      <Table columns={columns} dataSource={[]} />
+      <Table columns={columns} dataSource={dataRank} />
     </Card>
   );
 };

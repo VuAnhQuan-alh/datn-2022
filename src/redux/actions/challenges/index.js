@@ -7,6 +7,7 @@ import {
   DELETE_A_CHALLENGE,
   DELETE_SOLUTION,
   GET_A_CHALLENGE,
+  GET_CHALLENGES_JOIN,
   HOME_GET_CHALLENGES,
   RUN_SOLUTION,
   SUBMIT_CHALLENGE,
@@ -181,6 +182,21 @@ export const adminDelAChallenge = (id) => {
       })
       .catch(() => {
         dispatch(errorFormat(DELETE_A_CHALLENGE));
+      });
+  };
+};
+
+export const userGetChallengesJoined = () => {
+  return (dispatch) => {
+    return ChallengesAPI.getChallengeJoin()
+      .then((response) => {
+        if (response.status === 200) {
+          const result = response.data.data;
+          dispatch(successFormat(GET_CHALLENGES_JOIN, result));
+        }
+      })
+      .catch(() => {
+        dispatch(errorFormat(GET_CHALLENGES_JOIN));
       });
   };
 };

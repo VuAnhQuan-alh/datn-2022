@@ -8,6 +8,7 @@ import {
 } from "../../@core/components";
 import { challengesInHome } from "../../redux/actions/challenges";
 import "./index.scss";
+import SearchChallenges from "./SearchChallenge";
 
 const ChallengePage = () => {
   const dispatch = useDispatch();
@@ -37,11 +38,18 @@ const ChallengePage = () => {
         <Row justify="center" gutter={16}>
           {levels.map((item, idx) => (
             <Col key={idx}>
-              <CustomIconChallenge level={item} size="middle" fontSize="little" />
+              <CustomIconChallenge
+                level={item}
+                size="middle"
+                fontSize="little"
+              />
             </Col>
           ))}
         </Row>
       </Col>
+      <Row>
+        <SearchChallenges />
+      </Row>
       <Col style={{ maxWidth: 890, width: "100%", margin: "26px auto" }}>
         <CustomCardChallenge data={data} />
       </Col>

@@ -14,10 +14,10 @@ export default [
     icon: <Box size={20} />,
     navLink: "/challenges",
   },
-  // {
-  //   id: 'rank-board',
-  //   title: 'Xếp hạng',
-  //   icon: <Shield size={20} />,
-  //   navLink: '/rank-board'
-  // }
+  {
+    id: "rank-board",
+    title: "Xếp hạng",
+    icon: <Shield size={20} />,
+    navLink: "/rank-board",
+  },
 ];

@@ -31,7 +31,7 @@ const UserAPI = {
       const url = "/user/logout";
       return axiosClient.get(url);
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   },
 
@@ -46,6 +46,14 @@ const UserAPI = {
   getProfileUser() {
     try {
       const url = "/user/profile";
+      return axiosClient.get(url);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  getRankBoard() {
+    try {
+      const url = "/rank";
       return axiosClient.get(url);
     } catch (error) {
       throw new Error(error);
