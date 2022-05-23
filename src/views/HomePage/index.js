@@ -1,12 +1,11 @@
-import { Col, Progress, Row, Typography } from "antd";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CustomCard, CustomTitle } from "../../@core/components";
 import { challengesInHome } from "@store/actions/challenges";
+import { Col, Row, Typography } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CustomCard } from "../../@core/components";
 import { convertRank } from "../../utility/Utils";
 
 const Home = () => {
-  
   const [dataChallenges, setDataChallenges] = useState([]);
   const dispatch = useDispatch();
   const { data: listChallenges, status } = useSelector(

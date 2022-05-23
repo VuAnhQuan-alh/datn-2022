@@ -1,15 +1,13 @@
 // ** React Imports
-import React from "react";
 // ** Custom Components
-import Avatar from '@components/avatar'
+import Avatar from "@components/avatar";
 // ** Default Avatar Image
 // import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
-import defaultAvatar from '@src/assets/images/avatars/1-small.png'
-import { axiosClient } from "../../../../api/axiosClient";
+import defaultAvatar from "@src/assets/images/avatars/1-small.png";
 // ** Utils
-import { isUserLoggedIn } from '@utils'
-import { useEffect, useState } from 'react'
-import { Box, Clipboard, Power, User } from 'react-feather'
+import { isUserLoggedIn } from "@utils";
+import React, { useEffect, useState } from "react";
+import { Box, Clipboard, Power, User } from "react-feather";
 // ** Store & Actions
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -28,17 +26,17 @@ const UserDropdown = () => {
   const dispatch = useDispatch();
 
   // ** State
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState(null);
 
   //** ComponentDidMount
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
-      setUserData(JSON.parse(localStorage.getItem('userData')))
+      setUserData(JSON.parse(localStorage.getItem("userData")));
     }
-  }, [])
+  }, []);
 
   //** Vars
-  const userAvatar = (userData && userData.avatar) || defaultAvatar
+  const userAvatar = (userData && userData.avatar) || defaultAvatar;
 
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
