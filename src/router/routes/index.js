@@ -57,13 +57,13 @@ const Routes = [
       authRoute: true,
     },
   },
-  // {
-  //   path: '/rank-board',
-  //   component: lazy(() => import('../../views/RankBoard')),
-  //   meta: {
-  //     authRoute: true
-  //   }
-  // },
+  {
+    path: "/rank-board",
+    component: lazy(() => import("../../views/RankBoard")),
+    meta: {
+      authRoute: true,
+    },
+  },
   {
     path: "/my-challenges",
     component: lazy(() => import("../../views/Users")),

@@ -1,12 +1,11 @@
-import { Typography, Card, Col, Row, Tabs, Avatar } from "antd";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProfileUser } from "../../redux/actions/user";
+import { Avatar, Card, Col, Row, Tabs, Typography } from "antd";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { ContributeChallenges, MyChallenges } from "./components";
 
 const Users = () => {
   const [activeKey, setActiveKey] = useState("my-challenges");
-  const { data, status } = useSelector((store) => store.user_reducers);
+  const { data } = useSelector((store) => store.user_reducers);
 
   return (
     <Col span={24}>
@@ -26,9 +25,9 @@ const Users = () => {
       <Row>
         <Card style={{ width: "100%" }}>
           <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
-            {/* <Tabs.TabPane tab="Thử thách đã tham gia" key="joined-challenges">
+            <Tabs.TabPane tab="Thử thách đã tham gia" key="joined-challenges">
               components my joined challenges
-            </Tabs.TabPane> */}
+            </Tabs.TabPane>
             <Tabs.TabPane tab="Thử thách của tôi" key="my-challenges">
               <MyChallenges setActiveKey={setActiveKey} />
             </Tabs.TabPane>
