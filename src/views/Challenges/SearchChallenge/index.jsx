@@ -3,7 +3,7 @@ import { Form, Button, Col, Input, Select, Row } from "antd";
 import { useDispatch } from "react-redux";
 import { searchInHome } from "../../../redux/actions/challenges";
 
-const SearchChallenges = () => {
+const SearchChallenges = ({ currentPage }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -15,9 +15,18 @@ const SearchChallenges = () => {
         if (data?.rank) {
           url += `&rank=${data.rank}`;
         }
+        if (currentPage) {
+          url += `&page=${currentPage}`;
+        }
       }
       if (data?.rank && !data?.title) {
         url += `?rank=${data.rank}`;
+        if (currentPage) {
+          url += `&page=${currentPage}`;
+        }
+      }
+      if (!data?.rank && !data?.title && currentPage) {
+        url += `?page=${currentPage}`;
       }
       dispatch(searchInHome(url));
     });

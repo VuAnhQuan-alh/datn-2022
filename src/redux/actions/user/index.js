@@ -54,7 +54,7 @@ export const handleSignUp = (data) => {
   return (dispatch) => {
     return UserAPI.Register(data)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           const data = response.data;
           const {
             user: { name, email, rank, score, is_admin, verified, _id, avatar },

@@ -38,7 +38,33 @@ const TabListCase = ({ detail }) => {
     ),
     "sub-6": <>Lorem ipsum dolor sit amet consectetur.</>,
     "sub-7": <>Lorem</>,
-    "sub-8": <>Lorem ipsum dolor sit amet.</>,
+    "sub-8": (
+      <>
+        <Typography>
+          Hệ thống sẽ chấm điểm dựa trên giá trị trả về của hàm cho trước, đầu
+          vào và đầu ra chính là các tham số và giá trị trả về của hàm. Do đó,
+          bạn chỉ cần hoàn thiện hàm cho trước, không cần phải thực hiện nhập
+          xuất dữ liệu. Ví dụ nếu bài tập yêu cầu viết hàm trả về tổng 2 số
+          nguyên thì bạn có thể làm như sau:
+        </Typography>
+        <Typography>
+          - Đối với ngôn ngữ Javascript: <br />
+          {`function sumNum(a, b){ return a+b; }`}
+        </Typography>
+        <Typography>
+          - Đối với ngôn ngữ PHP: <br />
+          {`function sumNum($a, $b){return $a+$b;}`}
+        </Typography>
+        <Typography>
+          - Đối với ngôn ngữ Python3: <br />
+          {`def sumNum(a, b){return a+b;`}
+        </Typography>
+        <Typography>
+          - Đối với ngôn ngữ Java: <br />
+          {`int sumNum(int a, int b){return a + b;}`}
+        </Typography>
+      </>
+    ),
   };
 
   return (

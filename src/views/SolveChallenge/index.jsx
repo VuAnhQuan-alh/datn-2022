@@ -52,6 +52,7 @@ const SolveChallenge = () => {
       language: language,
     };
     if (type === "test") {
+      message.success("Đã chạy thử.");
       dispatch(userRunSolution(id, result));
     } else {
       dispatch(userSubmitChallenge(id, result));
@@ -106,7 +107,7 @@ const SolveChallenge = () => {
                 style={{ width: "120px" }}
                 onChange={(value) => setLanguage(value)}
               >
-                <Option value="c">C</Option>
+                {/* <Option value="c">C</Option> */}
                 <Option value="php">PHP</Option>
                 <Option value="java">Java</Option>
                 <Option value="javascript">JavaScript</Option>

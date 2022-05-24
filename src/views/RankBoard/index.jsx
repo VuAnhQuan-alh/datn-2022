@@ -1,8 +1,27 @@
-import { Avatar, Card, Table } from "antd";
+import { Avatar, Card, Table, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRankBoard } from "../../redux/actions/user";
 import "./index.scss";
+
+const convertRank = (rank) => {
+  switch (rank) {
+    case 1:
+      return "Basic";
+    case 2:
+      return "Intermediate";
+    case 3:
+      return "Advanced";
+    case 4:
+      return "Expert";
+    case 5:
+      return "Master";
+    case 6:
+      return "Grand Master";
+    default:
+      return "Basic";
+  }
+};
 
 const columns = [
   {
@@ -31,6 +50,9 @@ const columns = [
     dataIndex: "rank",
     key: "rank",
     align: "center",
+    render: (rank) => (
+      <Typography.Title level={5}>{convertRank(rank)}</Typography.Title>
+    ),
   },
   {
     title: "Điểm",

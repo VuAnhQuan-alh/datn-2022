@@ -1,6 +1,6 @@
 import BG_IMAGE from "@src/assets/images/pages/challange-filter-bgr.png";
 import { Col, Pagination, Row, Typography } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CustomCardChallenge,
@@ -13,6 +13,12 @@ import SearchChallenges from "./SearchChallenge";
 const ChallengePage = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((store) => store.list_challenges);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const onShowSizeChange = (current, pageSize) => {
+    setCurrentPage(current);
+    // console.log(current, pageSize);
+  };
 
   useEffect(() => {
     dispatch(challengesInHome());
@@ -48,25 +54,26 @@ const ChallengePage = () => {
         </Row>
       </Col>
       <Row>
-        <SearchChallenges />
+        <SearchChallenges currentPage={currentPage} />
       </Row>
       <Col style={{ maxWidth: 890, width: "100%", margin: "26px auto" }}>
         <CustomCardChallenge data={data} />
       </Col>
-      {/* <Row gutter={16} align="middle" style={{ marginTop: 10 }}>
+      <Row gutter={16} align="middle" style={{ marginTop: 10 }}>
         <Col style={{ color: "#7367f0", fontWeight: "bold" }}>
           1 - 10 trong {data.length} kết quả
         </Col>
         <Col>
           <Pagination
             pageSize={10}
-            showQuickJumper
+            // showQuickJumper
             defaultCurrent={1}
             total={data.length}
+            onShowSizeChange={onShowSizeChange}
             className="custom-pagination"
           />
         </Col>
-      </Row> */}
+      </Row>
     </>
   );
 };

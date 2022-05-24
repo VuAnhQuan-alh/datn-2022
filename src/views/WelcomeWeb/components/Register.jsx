@@ -18,7 +18,7 @@ const Register = () => {
       .validateFields()
       .then((data) => {
         dispatch(handleSignUp(data)).then(() => {
-          if (status === "success") {
+          if (localStorage.getItem("top-code")) {
             message.success("Chào mừng bạn đến với Top-code");
             history.push("/home");
           } else {
