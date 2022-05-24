@@ -25,7 +25,7 @@ export const user_reducers = (state = initialState, action) => {
   }
 };
 
-export const rank_board = (state = initialState, action) => {
+export const rank_board = (state = { data: [], status: null }, action) => {
   switch (action.type) {
     case "GET_RANK":
       return { ...state, data: action.data, status: action.status };
