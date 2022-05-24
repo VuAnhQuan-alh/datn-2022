@@ -9,9 +9,18 @@ const CustomTitle = ({ text, places, justify }) => {
   return (
     <>
       <Row justify={justify}>
-        <Col><CustomIconChallenge level={convertRank(places)} size="small" fontSize="little" /></Col>
         <Col>
-          <Typography.Title level={4} style={{ marginLeft: 5, padding: 0, color: '#575d63' }}>
+          <CustomIconChallenge
+            level={convertRank(places)}
+            size="small"
+            fontSize="little"
+          />
+        </Col>
+        <Col>
+          <Typography.Title
+            level={4}
+            style={{ marginLeft: 15, padding: 0, color: "#575d63" }}
+          >
             {text}
           </Typography.Title>
         </Col>

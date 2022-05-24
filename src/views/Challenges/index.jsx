@@ -53,7 +53,7 @@ const ChallengePage = () => {
       <Col style={{ maxWidth: 890, width: "100%", margin: "26px auto" }}>
         <CustomCardChallenge data={data} />
       </Col>
-      <Row gutter={16} align="middle" style={{ marginTop: 10 }}>
+      {/* <Row gutter={16} align="middle" style={{ marginTop: 10 }}>
         <Col style={{ color: "#7367f0", fontWeight: "bold" }}>
           1 - 10 trong {data.length} kết quả
         </Col>
@@ -66,7 +66,7 @@ const ChallengePage = () => {
             className="custom-pagination"
           />
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };

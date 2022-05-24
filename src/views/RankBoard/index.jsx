@@ -13,7 +13,10 @@ const columns = [
     width: 120,
     render: (_, record) => (
       <>
-        <Avatar size={48} src={`https://joeschmoe.io/api/v1/${record.rank}`} />
+        <Avatar
+          size={48}
+          src={record?.avatar || `https://joeschmoe.io/api/v1/${record?.rank}`}
+        />
       </>
     ),
   },
@@ -51,7 +54,7 @@ const RankBoard = () => {
 
   return (
     <Card className="custom-card" title="Xếp hạng người chơi">
-      <Table columns={columns} dataSource={dataRank} />
+      <Table columns={columns} dataSource={dataRank || []} />
     </Card>
   );
 };

@@ -59,6 +59,14 @@ const UserAPI = {
       throw new Error(error);
     }
   },
+  updateProfile(data) {
+    try {
+      const url = "/user/update-profile";
+      return axiosClient.put(url, data);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
 
 export default UserAPI;

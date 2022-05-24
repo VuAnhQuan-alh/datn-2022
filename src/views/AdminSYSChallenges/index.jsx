@@ -9,10 +9,12 @@ import {
   Row,
   Switch,
   Table,
+  Typography,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { Trash2 } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   adminAcceptChallenge,
   adminDelAChallenge,
@@ -35,7 +37,7 @@ const SysChallenges = () => {
     dispatch(adminGetChallenges());
   }, [dispatch]);
   useEffect(() => {
-    if (status === "success" && listChallenges.length) {
+    if (status === "success" && listChallenges.length > 0) {
       const result = listChallenges?.map((item, idx) => ({
         key: idx,
         stt: ++idx,
@@ -80,6 +82,15 @@ const SysChallenges = () => {
       title: "Tên Thử thách",
       dataIndex: "title",
       key: "title",
+      render: (_, record) => {
+        if (record.status === 1)
+          return (
+            <Link to={`/challenge/${record._id}/detail`}>
+              <Typography>{record.title}</Typography>
+            </Link>
+          );
+        else return <Typography>{record.title}</Typography>;
+      },
     },
     {
       title: "Người tạo",
@@ -151,7 +162,7 @@ const SysChallenges = () => {
 
   return (
     <Card className="custom-card" title="Quản lý thử thách">
-      <Table columns={columns} dataSource={dataChallenge} />
+      <Table columns={columns} dataSource={dataChallenge || []} />
     </Card>
   );
 };

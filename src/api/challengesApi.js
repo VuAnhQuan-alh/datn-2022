@@ -52,6 +52,13 @@ const ChallengesAPI = {
       throw new Error(error);
     }
   },
+  searchChallenges(url) {
+    try {
+      return axiosClient.get(url);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
   getDetailChallenge(id = "") {
     try {
       const url = `/user/detail-challenge/${id}`;

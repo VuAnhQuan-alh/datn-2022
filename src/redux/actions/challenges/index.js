@@ -172,6 +172,21 @@ export const challengesInHome = () => {
   };
 };
 
+export const searchInHome = (url) => {
+  return (dispatch) => {
+    return ChallengesAPI.searchChallenges(url)
+      .then((response) => {
+        if (response.status === 200) {
+          const result = response.data.data;
+          dispatch(successFormat(HOME_GET_CHALLENGES, result));
+        }
+      })
+      .catch(() => {
+        dispatch(errorFormat(HOME_GET_CHALLENGES));
+      });
+  };
+};
+
 export const adminDelAChallenge = (id) => {
   return (dispatch) => {
     return ChallengesAPI.adminDeleteChallenge(id)

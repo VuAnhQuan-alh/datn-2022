@@ -43,7 +43,7 @@ const CustomCard = ({
         ranks.map((rank, idx) => (
           <Col key={idx}>
             <CustomTitle
-              places={rank?.places}
+              places={rank?.rank}
               text={rank?.text}
               justify="start"
             />
@@ -55,7 +55,7 @@ const CustomCard = ({
                       <Star size={sizeIcon} /> {rank?.point}
                     </Tooltip>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <Tooltip placement="bottom" title="Tỉ lệ hoàn thành">
                       <Check size={sizeIcon} /> {rank?.pass}
                     </Tooltip>
@@ -79,7 +79,7 @@ const CustomCard = ({
                     <Tooltip placement="bottom" title="Lời giải">
                       <Archive size={sizeIcon} /> {rank?.answer}
                     </Tooltip>
-                  </Col>
+                  </Col> */}
                 </Row>
               </Col>
               <Col flex="auto" style={{ textAlign: "end" }}>

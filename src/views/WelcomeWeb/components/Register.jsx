@@ -1,35 +1,30 @@
 import { Button, Form, Input, message, Row } from "antd";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { UserAPI } from "../../../api";
+import { handleSignUp } from "../../../redux/actions/user";
 import "./index.scss";
 
 const Register = () => {
   const [form] = Form.useForm();
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const { data, status } = useSelector((store) => store.user_reducers);
+
   const handleRegis = () => {
     form
       .validateFields()
       .then((data) => {
-        console.log(data);
-        // (async (data) => {
-        //   await UserAPI.Login(data)
-        //     .then(response => {
-        //       if (response.status !== 200) {
-        //         message.error("Thông tin đăng nhập sai hoặc không tồn tại.");
-        //         form.resetFields();
-        //       }
-        //       if (response.status === 200) {
-        //         const { data: { data: { infoUser: { _id, is_admin, name, rank, score }, token } } } = response;
-        //         const result = { id: _id, isAdmin: is_admin, name, rank, score, token };
-        //         window.localStorage.setItem("top-code", JSON.stringify(result));
-        //         history.push("/home");
-        //       }
-        //     })
-        //     .catch(() => {
-        //       message.error('Thông tin đăng nhập sai hoặc không tồn tại.');
-        //     })
-        // })(data);
+        dispatch(handleSignUp(data)).then(() => {
+          if (status === "success") {
+            message.success("Chào mừng bạn đến với Top-code");
+            history.push("/home");
+          } else {
+            message.error("Thông tin đăng đăng ký đã tồn tại.");
+          }
+        });
       })
       .catch((error) => {
         console.log("Error: ", error);

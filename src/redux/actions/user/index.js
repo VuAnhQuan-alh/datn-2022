@@ -1,7 +1,6 @@
 import { UserAPI } from "../../../api";
-import { DELETE_A_CHALLENGE } from "../../constants/challenges";
-import { ID_USER } from "../../constants/id";
-import { GET_PROFILE, HANDLE_AUTH, HANDLE_LOGOUT } from "../../constants/user";
+import { GET_PROFILE, HANDLE_AUTH, UPDATE_PROFILE } from "../../constants/user";
+import { resetStore } from "../../storeConfig/store";
 
 export const getProfile = () => {
   return (dispatch) => {
@@ -51,24 +50,57 @@ export const handleSignIn = (data) => {
   };
 };
 
+export const handleSignUp = (data) => {
+  return (dispatch) => {
+    return UserAPI.Register(data)
+      .then((response) => {
+        if (response.status === 200) {
+          const data = response.data;
+          const {
+            user: { name, email, rank, score, is_admin, verified, _id, avatar },
+            token,
+          } = data;
+          const local = {
+            infoUser: {
+              _id,
+              name,
+              email,
+              rank,
+              score,
+              is_admin,
+              avatar,
+              verified,
+            },
+            token,
+          };
+          window.localStorage.setItem("top-code", JSON.stringify(local));
+          dispatch({
+            type: HANDLE_AUTH,
+            data: local.infoUser,
+            status: "success",
+          });
+        } else {
+          dispatch({
+            type: HANDLE_AUTH,
+            data: {},
+            status: "error",
+          });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: HANDLE_AUTH,
+          data: {},
+          status: "error",
+        });
+      });
+  };
+};
+
 export const handleLogout = () => {
   return (dispatch) => {
     return UserAPI.handleLogout().then(() => {
-      dispatch({
-        type: HANDLE_LOGOUT,
-        data: {},
-        status: null,
-      });
-      dispatch({
-        type: ID_USER,
-        data: {},
-        status: null,
-      });
-      dispatch({
-        type: DELETE_A_CHALLENGE,
-        data: {},
-        status: null,
-      });
+      resetStore();
       window.localStorage.removeItem("top-code");
     });
   };
@@ -86,5 +118,28 @@ export const getRankBoard = () => {
         });
       }
     });
+  };
+};
+
+export const userUpdateProfile = (data) => {
+  return (dispatch) => {
+    return UserAPI.updateProfile(data)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          dispatch({
+            type: UPDATE_PROFILE,
+            data: {},
+            status: "success",
+          });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: UPDATE_PROFILE,
+          data: {},
+          status: "error",
+        });
+      });
   };
 };

@@ -1,4 +1,9 @@
-import { GET_PROFILE, HANDLE_AUTH, HANDLE_LOGOUT } from "../../constants/user";
+import {
+  GET_PROFILE,
+  HANDLE_AUTH,
+  HANDLE_LOGOUT,
+  UPDATE_PROFILE,
+} from "../../constants/user";
 
 const initialState = {
   data: {},
@@ -26,5 +31,18 @@ export const rank_board = (state = initialState, action) => {
       return { ...state, data: action.data, status: action.status };
     default:
       return state;
+  }
+};
+
+export const action_users = (state = initialState, action) => {
+  switch (action.type) {
+    case UPDATE_PROFILE:
+      return {
+        ...state,
+        data: action.data,
+        status: action.status,
+      };
+    default:
+      return { ...state };
   }
 };

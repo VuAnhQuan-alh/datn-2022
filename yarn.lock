@@ -1592,90 +1592,6 @@
   resolved "https://registry.yarnpkg.com/@formatjs/macro/-/macro-0.2.8.tgz#e43228e02d0159817734ad80cc0326cfefaeeb6c"
   integrity sha512-5IBdn5+D8VGdi6Px0M/PidtqzHVrOj3dVJdV+YmWNRaWHdSvBd1wUd0gMcZnQXAxN+RzlGS/ddfOxFkjSlyQuA==
 
-"@fullcalendar/common@~5.7.0", "@fullcalendar/common@~5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/common/-/common-5.7.2.tgz#a9fae0159a26dd83b0b85df04df3fd66133fa433"
-  integrity sha512-0EDKmZBvTUFLvnJ7n6Vo6xMaPVm0jpYq739aSjwFPPXKgbjKFTPbWvLkaDpjJf7YhVebVSOLHbUC1Ky5wXsKvQ==
-  dependencies:
-    tslib "^2.0.3"
-
-"@fullcalendar/core@5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-5.7.2.tgz#77bc6e0e8044e2e9350d5d6647128e24a0da9894"
-  integrity sha512-4yKLUnAEDDIePw9WJuT2sSvLWGrDGBhp20cjBmyxnJ/6eNN1RCex/OjSu7qDNHvzey+ncjlVWsY41bvZwhpfvg==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    preact "^10.0.5"
-    tslib "^2.0.3"
-
-"@fullcalendar/daygrid@5.7.2", "@fullcalendar/daygrid@~5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.7.2.tgz#8576c65ffdcca5bc278e96c54cabbecaaabd229c"
-  integrity sha512-YHxOv3sLDwBWhb9+JBwQ/25VOJ0/22B6msRijIPbmJt5bljqYCIENQ4OLQ5UxZlkDC0Q9CSBg84oBtZYfW+kEg==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    tslib "^2.0.3"
-
-"@fullcalendar/interaction@5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/interaction/-/interaction-5.7.2.tgz#df06ab5fe71dff12ace85d61a1535fa24181acac"
-  integrity sha512-fnDcwE++0tie6wNVl/ZqUjgOQEekkdmbWH9hmcwE65y2aYMBX4IHE95MjMWVRAy2edahfAmy4xucQs2T0HYYSw==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    tslib "^2.0.3"
-
-"@fullcalendar/list@5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/list/-/list-5.7.2.tgz#7f9d6d3b86c2a8735ac03d2cddb0434a4a7ddc39"
-  integrity sha512-IV3SACoE02vheO3wEHjbaw1TGbjdjXHwD/+OtVOgoCNAxJVd0NI0d7kbIxVIniV2vrDPWkybCS1Abi2QANk3iQ==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    tslib "^2.0.3"
-
-"@fullcalendar/premium-common@~5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/premium-common/-/premium-common-5.7.2.tgz#a42be3f0ffe8cd566512e40130fe116b21d36adb"
-  integrity sha512-tehsHwFxxKftCZT8JoJ6t84AOOG+7NpV9kTF/ICQV9ZBDK0S4O2UHwEiGfCY4Iz/l3YW3RVUgrO6S+/p8pnFuw==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    tslib "^2.0.3"
-
-"@fullcalendar/react@5.7.0":
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/react/-/react-5.7.0.tgz#886ff7d283abf7c5e43ddf895ae88fa15d523039"
-  integrity sha512-9JdaN/pZXlUFyUe8H1NHIvEt5UVe2p/sctcfsQbKSPJ9NNTVmK+kk3qfUpOWEho6DYuFRLqYI+VwmeVM5mE8rA==
-  dependencies:
-    "@fullcalendar/common" "~5.7.0"
-    tslib "^2.0.3"
-
-"@fullcalendar/scrollgrid@~5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/scrollgrid/-/scrollgrid-5.7.2.tgz#c17878c467a4c88aa0e84322d01d7b86f51a247c"
-  integrity sha512-cU0khf72kP7m1cpSYYWSFnLNii36VRlg6Kdix/2mr3BBX74bjFsJfWkWKneO/bZzJgIBvKYehQ/SYiZNC77xuA==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    "@fullcalendar/premium-common" "~5.7.2"
-    tslib "^2.0.3"
-
-"@fullcalendar/timegrid@5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-5.7.2.tgz#0c2d832070744c154f71b4c442e59910407d954e"
-  integrity sha512-FRZRwVtlahljSILexvmhLg2LnFbJVCpeuzAIgdURmRoSDCCDuxoA6Z3l66a/QFp3LcFVbZbg7VjKibyvvB9b9A==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    "@fullcalendar/daygrid" "~5.7.2"
-    tslib "^2.0.3"
-
-"@fullcalendar/timeline@5.7.2":
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/timeline/-/timeline-5.7.2.tgz#080cb863fc955843abdafc40733aa79924075c45"
-  integrity sha512-n8FaVuGdIZVztNM8f20/TP0emTS1rfCKFZmXtm566t7u3oKEzDBmgHIHDRgNZafTX1qmCSCP7ANkgi1UKN7E8g==
-  dependencies:
-    "@fullcalendar/common" "~5.7.2"
-    "@fullcalendar/premium-common" "~5.7.2"
-    "@fullcalendar/scrollgrid" "~5.7.2"
-    tslib "^2.0.3"
-
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
@@ -8597,11 +8513,6 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-jquery@3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
-  integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
-
 js-base64@^2.1.8, js-base64@^2.6.1:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -11172,11 +11083,6 @@ preact@8.2.9:
   resolved "https://registry.yarnpkg.com/preact/-/preact-8.2.9.tgz#813ba9dd45e5d97c5ea0d6c86d375b3be711cc40"
   integrity sha512-ThuGXBmJS3VsT+jIP+eQufD3L8pRw/PY3FoCys6O9Pu6aF12Pn9zAJDX99TfwRAFOCEKm/P0lwiPTbqKMJp0fA==
 
-preact@^10.0.5:
-  version "10.6.6"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.6.6.tgz#f1899bc8dab7c0788b858481532cb3b5d764a520"
-  integrity sha512-dgxpTFV2vs4vizwKohYKkk7g7rmp1wOOcfd4Tz3IB3Wi+ivZzsn/SpeKJhRENSE+n8sUfsAl4S3HiCVT923ABw==
-
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -12454,6 +12360,11 @@ redux-debounced@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/redux-debounced/-/redux-debounced-0.5.0.tgz#4dde27a3e66ea428afe78215f30a27f22714605b"
   integrity sha512-O2anhB0A6yQZH19uLETFtajcUQLcyiJcgC0hHSoFr5T3hWGtt0C5s6KNnb2RX51MwCh5VCl9ehZTv91F/rsZww==
+
+redux-reset@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/redux-reset/-/redux-reset-0.3.0.tgz#ab80795b410d5b28689986eac40cb847a69cd012"
+  integrity sha1-q4B5W0ENWyhomYbqxAy4R6ac0BI=
 
 redux-thunk@2.3.0:
   version "2.3.0"

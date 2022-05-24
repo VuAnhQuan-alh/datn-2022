@@ -9,9 +9,12 @@ import {
   Typography,
   Modal,
   Form,
+  message,
 } from "antd";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userGetChallenges } from "../../redux/actions/challenges";
+import { getProfile, userUpdateProfile } from "../../redux/actions/user";
 import { ContributeChallenges, MyChallenges } from "./components";
 import ChallengesJoined from "./components/ChallengesJoined";
 
@@ -21,13 +24,26 @@ const Users = () => {
   const [openModal, setOpenModal] = useState(false);
   const [form] = Form.useForm();
 
+  const dispatch = useDispatch();
+  const { status: statusProfile } = useSelector((store) => store.action_users);
+  useEffect(() => {
+    dispatch(userGetChallenges());
+  }, [dispatch]);
+
   const handleCancel = () => {
     form.resetFields();
     setOpenModal(false);
   };
   const handleUpdate = () => {
     form.validateFields().then((data) => {
-      console.log(data);
+      const result = { ...data, avatar: "https://joeschmoe.io/api/v1/random" };
+      dispatch(userUpdateProfile(result)).then(() => {
+        // if (statusProfile === "success") {
+        message.success("Cập nhật thành công!");
+        handleCancel();
+        dispatch(getProfile());
+        // }
+      });
     });
   };
 
