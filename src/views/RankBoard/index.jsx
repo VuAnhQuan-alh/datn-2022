@@ -43,18 +43,14 @@ const columns = [
 const RankBoard = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((store) => store.rank_board);
-  const [dataRank, setDataRank] = useState([]);
 
   useEffect(() => {
     dispatch(getRankBoard());
   }, [dispatch]);
-  useEffect(() => {
-    setDataRank(data);
-  }, [data]);
 
   return (
     <Card className="custom-card" title="Xếp hạng người chơi">
-      <Table columns={columns} dataSource={dataRank || []} />
+      <Table columns={columns} dataSource={data || []} />
     </Card>
   );
 };

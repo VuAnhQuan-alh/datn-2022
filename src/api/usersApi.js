@@ -67,6 +67,14 @@ const UserAPI = {
       throw new Error(error);
     }
   },
+  inactiveUser(id) {
+    try {
+      const url = `/admin/inactive-user/${id}`;
+      return axiosClient.put(url, {});
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
 
 export default UserAPI;

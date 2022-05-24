@@ -3,6 +3,7 @@ import { Col, Row, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CustomCard } from "../../@core/components";
+import { getRankBoard } from "../../redux/actions/user";
 import { convertRank } from "../../utility/Utils";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(challengesInHome());
+    dispatch(getRankBoard());
   }, [dispatch]);
   useEffect(() => {
     if (status === "success" && listChallenges.length > 0) {

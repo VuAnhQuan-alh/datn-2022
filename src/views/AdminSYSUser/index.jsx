@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
 import {
-  Switch,
-  Button,
-  Popconfirm,
+  Avatar,
   Card,
   Col,
-  Row,
-  Table,
-  Avatar,
   Image,
+  message,
+  Popconfirm,
+  Row,
+  Switch,
+  Table,
 } from "antd";
+import React, { useEffect, useState } from "react";
 import { UserAPI } from "../../api";
-import { Edit, Trash2 } from "react-feather";
 
 const SysUser = () => {
   const [dataUser, setDataUser] = useState();
@@ -40,6 +39,22 @@ const SysUser = () => {
         console.log(error);
       });
   };
+
+  const acceptUser = async (id) => {
+    await UserAPI.inactiveUser(id)
+      .then((response) => {
+        if (response.status === 200) {
+          message.success("Cập nhật thành công!");
+          getDataUser();
+        } else {
+          message.error("Cập nhật không thành công.");
+        }
+      })
+      .catch(() => {
+        message.error("Lỗi hệ thống.");
+      });
+  };
+
   useEffect(() => {
     getDataUser();
   }, []);
@@ -102,19 +117,13 @@ const SysUser = () => {
       render: (_, record) => (
         <Row gutter={16} justify="center" align="middle">
           <Col>
-            <Button icon={<Edit size={16} />} />
-          </Col>
-          <Col>
-            <Button icon={<Trash2 size={16} />} />
-          </Col>
-          <Col>
             <Popconfirm
-              title="Xác thực người dùng?"
-              onConfirm={() => console.log("active toggle")}
+              title="Thay đổi xác thực người dùng?"
+              onConfirm={() => acceptUser(record._id)}
               okText="Yes"
               cancelText="No"
             >
-              <Switch checked={record.verified === 1} />
+              <Switch checked={record.verified} />
             </Popconfirm>
           </Col>
         </Row>
